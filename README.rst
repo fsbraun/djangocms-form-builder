@@ -1,10 +1,10 @@
-#####################
- django CMS Frontend
-#####################
+#################
+ django CMS Forms
+#################
 
 |pypi| |docs| |coverage| |python| |django| |djangocms|
 
-**djangocms-frontend** supports rendering of styled forms which is part of
+**djangocms-forms** supports rendering of styled forms which is part of
 all major frontend frameworks, like Bootstrap 5. The objective is to tightly
 integrate forms in the website design. Djangocms-frontend allows as many forms
 as you wish on one page. All forms are **ajax/xhr-based**. To this end,
@@ -31,8 +31,9 @@ There are two different ways to manage forms with **djangocms-frontend**:
    editors to use them in the form plugin. If you use
    `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_
    all form layouts will be retained. If you only have simpler design
-   requirements, **djangocms-frontend** allows you to use fieldsets as with
+   requirements, **djangocms-forms** allows you to use fieldsets as with
    admin forms.
+
 **************
  Key features
 **************
