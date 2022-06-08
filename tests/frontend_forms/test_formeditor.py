@@ -3,8 +3,8 @@ import inspect
 from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
-from djangocms_frontend.contrib.frontend_forms import cms_plugins
-from djangocms_frontend.contrib.frontend_forms.cms_plugins.form_plugins import (
+from djangocms_form_builder import cms_plugins
+from djangocms_form_builder.cms_plugins.form_plugins import (
     FormElementPlugin,
 )
 

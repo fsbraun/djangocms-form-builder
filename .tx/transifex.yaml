@@ -2,6 +2,6 @@ git:
   filters:
   - filter_type: file
     file_format: PO
-    source_file: djangocms_forms/locale/en/LC_MESSAGES/django.po
+    source_file: djangocms_form_builder/locale/en/LC_MESSAGES/django.po
     source_language: en
-    translation_files_expression: 'djangocms_forms/locale/<lang>/LC_MESSAGES/django.po'
+    translation_files_expression: 'djangocms_form_builder/locale/<lang>/LC_MESSAGES/django.po'

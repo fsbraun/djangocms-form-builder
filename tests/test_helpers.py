@@ -48,7 +48,7 @@ class HelpersTestCase(TestFixture, CMSTestCase):
             CAROUSEL_TEMPLATE_CHOICES,
         )
         self.assertEqual(
-            template, "djangocms_frontend/bootstrap5/does_not/default/exist.html"
+            template, "djangocms_form_builder/bootstrap5/does_not/default/exist.html"
         )
         # cleanup
         self.page.delete()

@@ -18,7 +18,7 @@ class MigrationTestCase(TestCase):
         }
 
         try:
-            call_command("makemigrations", "djangocms_forms", **options)
+            call_command("makemigrations", "djangocms_form_builder", **options)
         except SystemExit as e:
             status_code = str(e)
         else:

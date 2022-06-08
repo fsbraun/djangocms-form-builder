@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 from setuptools import find_packages, setup
 
-from djangocms_forms import __version__
+from djangocms_form_builder import __version__
 
 REQUIREMENTS = [
-    "Django>=2.2,<4",
+    "Django>=2.2",
     "django-cms>=3.7",
-    "django-filer>=1.7",
     "djangocms-attributes-field>=1",
-    "djangocms-text-ckeditor>=3.1.0",
     "django-select2",
     "django-entangled==0.4",
 ]
@@ -49,7 +47,7 @@ setup(
     version=__version__,
     author="fsbraun",
     author_email="fsbraun@gmx.de",
-    url="https://github.com/fsbraun/djangocms-forms",
+    url="https://github.com/fsbraun/djangocms-form-builder",
     license="BSD-3-Clause",
     description="Adds a form editor to the structure board of django CMS.",
     long_description=open("README.rst").read(),

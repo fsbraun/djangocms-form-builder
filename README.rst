@@ -77,12 +77,12 @@ For a manual install:
 
 -  run ``pip install djangocms-forms``
 
--  add ``djangocms_forms`` to your ``INSTALLED_APPS``:
+-  add ``djangocms_form_builder`` to your ``INSTALLED_APPS``:
 
 -  run ``python manage.py migrate``
 
-To use the **djangocms-forms** you will have to have
-jQuery installed in your project. ``djangocms_frontend`` does not include
+To use the **djangocms-form-builder** you will have to have
+jQuery installed in your project. ``djangocms-form-builder`` does not include
 jQuery.
 
 Documentation
