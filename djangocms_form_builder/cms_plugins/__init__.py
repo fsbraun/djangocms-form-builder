@@ -1,3 +1,5 @@
+from . import legacy
+
 from .ajax_plugins import FormPlugin
 from .form_plugins import (
     BooleanFieldPlugin,

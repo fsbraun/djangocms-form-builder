@@ -4,16 +4,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-################################################
- Welcome to djangocms-forms' documentation!
-################################################
+###################################################
+ Welcome to djangocms-form-builder's documentation!
+###################################################
 
-********************
- djangocms-forms
-********************
+***********************
+ djangocms-form-builder
+***********************
 
-**djangocms-frontend** is a plugin bundle based on `djangocms_bootstrap5
-<https://github.com/gl-agnx/djangocms-bootstrap5>`_. Its objective is to
+**djangocms-form-builder**'s objective is to
 provide a set of popular frontend components independent of the
 currently used frontend framework such as Bootstrap, or its specific
 version.

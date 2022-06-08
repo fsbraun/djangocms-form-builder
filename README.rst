@@ -4,7 +4,7 @@
 
 |pypi| |docs| |coverage| |python| |django| |djangocms|
 
-**djangocms-forms** supports rendering of styled forms which is part of
+**djangocms-form-builder** supports rendering of styled forms which is part of
 all major frontend frameworks, like Bootstrap 5. The objective is to tightly
 integrate forms in the website design. Djangocms-frontend allows as many forms
 as you wish on one page. All forms are **ajax/xhr-based**. To this end,
@@ -31,7 +31,7 @@ There are two different ways to manage forms with **djangocms-frontend**:
    editors to use them in the form plugin. If you use
    `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_
    all form layouts will be retained. If you only have simpler design
-   requirements, **djangocms-forms** allows you to use fieldsets as with
+   requirements, **djangocms-form-builder** allows you to use fieldsets as with
    admin forms.
 
 **************
@@ -75,7 +75,7 @@ Installation
 
 For a manual install:
 
--  run ``pip install djangocms-forms``
+-  run ``pip install git+https://github.com/fsbraun/djangocms-form-builder@master#egg=djangocms-form-builder``
 
 -  add ``djangocms_form_builder`` to your ``INSTALLED_APPS``:
 

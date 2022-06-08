@@ -43,7 +43,7 @@ CLASSIFIERS = [
 
 
 setup(
-    name="djangocms-forms",
+    name="djangocms-form-builder",
     version=__version__,
     author="fsbraun",
     author_email="fsbraun@gmx.de",
