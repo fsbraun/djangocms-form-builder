@@ -445,9 +445,6 @@ class SubmitButton(FormField):
         proxy = True
         verbose_name = _("Submit button")
 
-    def get_form_field(self):
-        return self.field_name, FormSubmitButton(label=None)
-
 
 try:
     """Soft dependency on django-captcha for reCaptchaField"""

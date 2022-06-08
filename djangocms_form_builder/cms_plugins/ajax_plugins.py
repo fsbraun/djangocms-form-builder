@@ -237,7 +237,6 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
         return context
 
 
-
 @plugin_pool.register_plugin
 class FormPlugin(CMSAjaxForm):
     name = _("Form")
@@ -273,16 +272,15 @@ class FormPlugin(CMSAjaxForm):
         ),
     ]
 
-    @classmethod
-    def get_parent_classes(cls, slot, page, instance=None):   # TODO Should avoid nested forms -> not working
-        """Only valid if not inside form"""
-        print("XXX form parent classes", instance)
-        parent = instance
-        while parent is not None:
-            if parent.plugin_type == FormPlugin.__name__:
-                return [""]
-            parent = parent.parent
-        return super().get_parent_classes(slot, page, instance)
+    # @classmethod
+    # def get_parent_classes(cls, slot, page, instance=None):   # TODO Should avoid nested forms -> not working
+    #     """Only valid if not inside form"""
+    #     parent = instance
+    #     while parent is not None:
+    #         if parent.plugin_type == FormPlugin.__name__:
+    #             return [""]
+    #         parent = parent.parent
+    #     return super().get_parent_classes(slot, page, instance)
 
     def get_fieldsets(self, request, obj=None):
         if recaptcha.installed:
@@ -365,18 +363,6 @@ class FormPlugin(CMSAjaxForm):
             (SimpleFrontendForm,),
             fields,
         )
-
-    @classmethod
-    def get_parent_classes(cls, slot, page, instance=None):
-        """Avoid form in a form"""
-        if instance is None or instance.parent is None:
-            return super().get_parent_classes(slot, page, instance)
-        parent = instance.parent
-        while parent is not None:
-            if parent.plugin_type == cls.__name__:
-                return [""]
-            parent = parent.parent
-        return super().get_parent_classes(slot, page, instance)
 
     def render(self, context, instance, placeholder):
         self.instance = instance

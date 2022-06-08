@@ -247,7 +247,6 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
 
     def is_valid(self):
         valid = super().is_valid()
-        print("XXX", self.errors, self.non_field_errors())
         return valid
 
 

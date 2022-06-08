@@ -35,7 +35,6 @@ class FormElementPlugin(CMSPluginBase):
     @classmethod
     def get_parent_classes(cls, slot, page, instance=None):
         """Only valid as indirect child of the cls.top_element"""
-        print("XXX formelement parent classes", instance)
 
         if instance is None:
             return [""]
@@ -240,7 +239,10 @@ class BooleanFieldPlugin(mixin_factory("BooleanField"), FormElementPlugin):
 class SubmitPlugin(mixin_factory("SubmitButton"), FormElementPlugin):
     name = _("Submit button")
     module = _("Forms")
+
     fieldsets = ((None, {"fields": (                    ("field_name", "field_label"),
 ("submit_cta",),)}),)
     model = models.SubmitButton
     form = forms.SubmitButtonForm
+
+    render_template = f"djangocms_form_builder/{settings.framework}/widgets/submit.html"
