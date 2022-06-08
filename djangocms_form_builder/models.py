@@ -5,6 +5,7 @@ from django import forms
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import validate_slug
 from django.db import models
+from django.forms.widgets import Input
 from django.utils.html import conditional_escape, mark_safe
 from django.utils.translation import gettext, gettext_lazy as _
 
@@ -435,10 +436,17 @@ class BooleanField(FormField):
         )
 
 
+class FormSubmitButton(forms.Field):
+    widget = Input(attrs=dict(type="submit"))
+
+
 class SubmitButton(FormField):
     class Meta:
         proxy = True
         verbose_name = _("Submit button")
+
+    def get_form_field(self):
+        return self.field_name, FormSubmitButton(label=None)
 
 
 try:

@@ -6,6 +6,7 @@ from django.http import Http404, JsonResponse
 from django.template.context_processors import csrf
 from django.template.loader import render_to_string
 from django.urls import NoReverseMatch, reverse
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import FormMixin
 from sekizai.context import SekizaiContext
@@ -244,7 +245,7 @@ class FormPlugin(CMSAjaxForm):
 
     # form = forms.FormsForm
     render_template = f"djangocms_form_builder/{settings.framework}/form.html"
-    change_form_template = "djangocms_form_builder/admin/forms.html"
+    change_form_template = "djangocms_frontend/admin/base.html"
     allow_children = True
 
     fieldsets = [
@@ -382,3 +383,6 @@ class FormPlugin(CMSAjaxForm):
         # instance.add_classes("djangocms-frontend-ajax-form")
         context["RECAPTCHA_PUBLIC_KEY"] = recaptcha.RECAPTCHA_PUBLIC_KEY
         return super().render(context, instance, placeholder)
+
+    def __str__(self):
+        return force_str(super().__str__())

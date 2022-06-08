@@ -1,5 +1,6 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
 from .. import settings
@@ -16,6 +17,7 @@ class FormElementPlugin(CMSPluginBase):
     top_element = FormPlugin.__name__
     module = _("Forms")
     render_template = f"djangocms_form_builder/{settings.framework}/widgets/base.html"
+    change_form_template = "djangocms_frontend/admin/base.html"
     settings_name = _("Settings")
 
     fieldsets = (
@@ -59,6 +61,9 @@ class FormElementPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         # instance.add_classes("form-control")
         return super().render(context, instance, placeholder)
+
+    def __str__(self):
+        return force_str(super().__str__())
 
 
 @plugin_pool.register_plugin
@@ -172,7 +177,7 @@ class SelectPlugin(mixin_factory("SelectField"), FormElementPlugin):
         child_plugins = obj.get_children()
         children = {}
         for child in child_plugins:
-            child_ui = child.djangocms_frontend_frontenduiitem
+            child_ui = child.djangocms_form_builder_formfield
             children[child_ui.config["value"]] = child_ui
         position = len(child_plugins)
         data = form.cleaned_data
@@ -229,3 +234,13 @@ class BooleanFieldPlugin(mixin_factory("BooleanField"), FormElementPlugin):
             },
         ),
     )
+
+
+@plugin_pool.register_plugin
+class SubmitPlugin(mixin_factory("SubmitButton"), FormElementPlugin):
+    name = _("Submit button")
+    module = _("Forms")
+    fieldsets = ((None, {"fields": (                    ("field_name", "field_label"),
+("submit_cta",),)}),)
+    model = models.SubmitButton
+    form = forms.SubmitButtonForm

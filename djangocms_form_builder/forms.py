@@ -549,3 +549,22 @@ class BooleanFieldForm(
             "If checked, the form can only be submitted if the "
             "checkbox is checked or the switch set to on."
         )
+
+
+class SubmitButtonForm(
+    mixin_factory("SubmitButton"), FormFieldMixin, EntangledModelForm
+):
+    class Meta:
+        model = FormField
+        entangled_fields = {
+            "config": [
+                "submit_cta",
+            ]
+        }
+
+    submit_cta = forms.CharField(
+        label=_("Button label"),
+        initial=_("Submit"),
+        required=False,
+    )
+
