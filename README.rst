@@ -81,10 +81,10 @@ jQuery installed in your project. ``djangocms-form-builder`` does not include
 jQuery.
 
 
-.. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
+.. |pypi| image:: https://badge.fury.io/py/djangocms-form-builder.svg
    :target: http://badge.fury.io/py/djangocms-form-builder
 
-.. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
+.. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-form-builder/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/fsbraun/djangocms-form-builder
 
 .. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
