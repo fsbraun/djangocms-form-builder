@@ -1,6 +1,6 @@
-#################
- django CMS Forms
-#################
+########################
+ django CMS form builder
+########################
 
 |pypi| |docs| |coverage| |python| |django| |djangocms|
 
@@ -21,12 +21,11 @@ There are two different ways to manage forms with **djangocms-frontend**:
    results in the database for later evaluation and mailing submitted forms to
    the site admins. Other form actions can be registered.
 
-   If you prefer to have a central form repository, we suggest
-   **djangocms-alias** to manage your forms centrally. Djangocms-alias becomes
-   your form editors and forms can be placed on pages by refering to them with
+2. Works with **djangocms-alias** to manage your forms centrally. Djangocms-alias becomes
+   your form editor and forms can be placed on pages by refering to them with
    their alias.
 
-2. **Registering an application-specific form with djangocms-frontend.** If you
+3. **Registering an application-specific form with djangocms-frontend.** If you
    already have forms you may register them with djangocms-frontend and allow
    editors to use them in the form plugin. If you use
    `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_
@@ -38,11 +37,11 @@ There are two different ways to manage forms with **djangocms-frontend**:
  Key features
 **************
 
--  Support of `Bootstrap 5 <https://getbootstrap.com>`_.
+-  Supports `Bootstrap 5 <https://getbootstrap.com>`_.
 
--  **Separation of plugins from css framework**, i.e. no need to
-   rebuild you site's plugin tree if css framework is changed in the
-   future, e.g. from Bootstrap 5 to a future version.
+-  Open architecture to support other css frameworks.
+
+-  Integrates with `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_
 
 
 Feedback
@@ -63,11 +62,9 @@ pull request, please review our `contribution guidelines
 
 We're grateful to all contributors who have helped create and maintain
 this package. Contributors are listed at the `contributors
-<https://github.com/django-cms/djangocms-frontend/graphs/contributors>`_
+<https://github.com/fsbraun/djangocms-form-builder/graphs/contributors>`_
 section.
 
-One of the easiest contributions you can make is helping to translate this addon on
-`Transifex <https://www.transifex.com/divio/djangocms-frontend/dashboard/>`_.
 
 
 Installation
@@ -85,11 +82,6 @@ To use the **djangocms-form-builder** you will have to have
 jQuery installed in your project. ``djangocms-form-builder`` does not include
 jQuery.
 
-Documentation
-=============
-
-See readthedocs for the `documentation
-<https://djangocms-frontend.readthedocs.io>`_.
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
    :target: http://badge.fury.io/py/djangocms-frontend
