@@ -2,7 +2,7 @@
  django CMS form builder
 ########################
 
-|pypi| |docs| |coverage| |python| |django| |djangocms|
+|pypi| |coverage| |python| |django| |djangocms| |djangocms4|
 
 **djangocms-form-builder** supports rendering of styled forms which is part of
 all major frontend frameworks, like Bootstrap 5. The objective is to tightly
@@ -25,11 +25,9 @@ There are two different ways to manage forms with **djangocms-frontend**:
    your form editor and forms can be placed on pages by refering to them with
    their alias.
 
-3. **Registering an application-specific form with djangocms-frontend.** If you
-   already have forms you may register them with djangocms-frontend and allow
-   editors to use them in the form plugin. If you use
-   `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_
-   all form layouts will be retained. If you only have simpler design
+3. **Registering an application-specific form with djangocms-form-builder.** If you
+   already have forms you may register them with djangocms-form-builder and allow
+   editors to use them in the form plugin. If you only have simpler design
    requirements, **djangocms-form-builder** allows you to use fieldsets as with
    admin forms.
 
@@ -84,20 +82,19 @@ jQuery.
 
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-frontend.svg
-   :target: http://badge.fury.io/py/djangocms-frontend
-
-.. |docs| image:: https://readthedocs.org/projects/djangocms-frontend/badge/?version=latest
-    :target: https://djangocms-frontend.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
+   :target: http://badge.fury.io/py/djangocms-form-builder
 
 .. |coverage| image:: https://codecov.io/gh/fsbraun/djangocms-frontend/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/fsbraun/djangocms-frontend
+   :target: https://codecov.io/gh/fsbraun/djangocms-form-builder
 
 .. |python| image:: https://img.shields.io/badge/python-3.7+-blue.svg
-   :target: https://pypi.org/project/djangocms-frontend/
+   :target: https://pypi.org/project/djangocms-form-builder/
 
 .. |django| image:: https://img.shields.io/badge/django-3.2-blue.svg
    :target: https://www.djangoproject.com/
 
 .. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.8%2B-blue.svg
+   :target: https://www.django-cms.org/
+
+.. |djangocms4| image:: https://img.shields.io/badge/django%20CMS-4%2B-blue.svg
    :target: https://www.django-cms.org/
