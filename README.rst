@@ -4,14 +4,13 @@
 
 |pypi| |coverage| |python| |django| |djangocms| |djangocms4|
 
-**djangocms-form-builder** supports rendering of styled forms which is part of
-all major frontend frameworks, like Bootstrap 5. The objective is to tightly
-integrate forms in the website design. Djangocms-frontend allows as many forms
-as you wish on one page. All forms are **ajax/xhr-based**. To this end,
-djangocms-frontend extends the django CMS plugin model allowing a form plugin
-to receive ajax post requests.
+**djangocms-form-builder** supports rendering of styled forms. The objective is
+to tightly integrate forms in the website design. **djangocms-form-builder**
+allows as many forms as you wish on one page. All forms are **ajax/xhr-based**.
+To this end, **djangocms-form-builder** extends the django CMS plugin model
+allowing a form plugin to receive ajax post requests.
 
-There are two different ways to manage forms with **djangocms-frontend**:
+There are two different ways to manage forms with **djangocms-form-builder**:
 
 1. **Building a form with django CMS' powerful structure board.** This is
    fast an easy. It integrates smoothly with other design elements, especially
