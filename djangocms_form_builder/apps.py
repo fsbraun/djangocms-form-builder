@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class FormsConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
     name = "djangocms_form_builder"
     verbose_name = _("django CMS form builder")
 
