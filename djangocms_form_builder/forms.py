@@ -284,21 +284,25 @@ class FormFieldMixin(EntangledModelFormMixin):
 
     field_name = forms.CharField(
         label=_("Field name"),
+        help_text=_("Internal field name consisting of letters, numbers, underscores or hyphens"),
         required=True,
         validators=[validate_slug, validate_form_name],
     )
     field_label = forms.CharField(
         label=_("Label"),
+        help_text=_("Field label shown to the user describing the entity to be entered"),
         required=False,
     )
     field_placeholder = forms.CharField(
         label=_("Placeholder"),
+        help_text=_("Example input shown muted in an empty field"),
         required=False,
     )
     field_required = forms.BooleanField(
         label=_("Required"),
         initial=False,
         required=False,
+        help_text=_("If selected form will not accept submissions with with empty data"),
     )
 
 

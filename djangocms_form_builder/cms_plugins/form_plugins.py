@@ -25,7 +25,7 @@ class FormElementPlugin(CMSPluginBase):
             None,
             {
                 "fields": (
-                    ("field_name", "field_label"),
+                    ("field_label", "field_name"),
                     ("field_required", "field_placeholder"),
                 )
             },
@@ -149,7 +149,7 @@ class SelectPlugin(mixin_factory("SelectField"), FormElementPlugin):
             None,
             {
                 "fields": (
-                    ("field_name", "field_label"),
+                    ("field_label", "field_name"),
                     "field_select",
                     "field_required",
                 )
@@ -226,7 +226,7 @@ class BooleanFieldPlugin(mixin_factory("BooleanField"), FormElementPlugin):
             None,
             {
                 "fields": (
-                    ("field_name", "field_label"),
+                    ("field_label", "field_name"),
                     "field_as_switch",
                     "field_required",
                 )

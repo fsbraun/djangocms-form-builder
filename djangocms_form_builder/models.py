@@ -228,6 +228,9 @@ class UrlField(FormField):
         return self.field_name, forms.URLField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
+            widget=forms.URLInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", ""))
+            ),
         )
 
 
@@ -269,6 +272,7 @@ class DecimalField(FormField):
             max_value=coerce_decimal(self.config.get("max_value", None)),
             decimal_places=self.config.get("decimal_places", None),
             widget=DecimalField.NumberInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", "")),
                 decimal_places=self.config.get("decimal_places", None)
             ),
         )
@@ -283,6 +287,9 @@ class IntegerField(FormField):
         return self.field_name, forms.IntegerField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
+            widget=DecimalField.NumberInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", "")),
+            ),
         )
 
 
@@ -317,7 +324,9 @@ class DateField(FormField):
         return self.field_name, forms.DateField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
-            widget=DateField.DateInput(),
+            widget=DateField.DateInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", "")),
+           ),
         )
 
 
@@ -341,7 +350,9 @@ class DateTimeField(FormField):
         return self.field_name, DateTimeField.DateTimeField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
-            widget=DateTimeField.DateTimeInput(),
+            widget=DateTimeField.DateTimeInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", "")),
+            ),
         )
 
 
@@ -357,7 +368,9 @@ class TimeField(FormField):
         return self.field_name, forms.TimeField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
-            widget=TimeField.TimeInput(),
+            widget=TimeField.TimeInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", "")),
+            ),
         )
 
 

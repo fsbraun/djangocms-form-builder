@@ -134,7 +134,6 @@ def render_widget(context, form, form_field, **kwargs):
             or input_type == "select"
             and floating_labels
         )
-
     widget = field.as_widget(attrs=widget_attr)
     label = field.label_tag(attrs=label_attr)
     if input_first:
