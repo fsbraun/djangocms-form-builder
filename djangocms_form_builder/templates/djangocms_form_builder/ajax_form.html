@@ -33,25 +33,40 @@
             function feedback(node, data) {
                 console.log(data);
                 if (data.result === 'success') {
-                    /* if (typeof($(node).data().success) === "function") {
+{#
+                    if (typeof($(node).data().success) === "function") {
                         $(node).data().success();
-                    } */
-                    node.replaceWith(function () {
-                        return $(data.content).hide().fadeIn();
-                    });
+                    }
+#}
+                    node.outerHTML = data.content;
+                    node.style.transition='';
+                    node.style.opacity = 0;
+                    node.style.transition='opacity 0.3s';
+                    node.style.opacity = 1;
                 } else if (data.result === 'result') {
-                    $(node).find(".all-invalid").addClass("d-none")
-                        .find("li").remove();
-                    $(node).find('.form-group')
-                        .addClass('has-feedback has-success is-valid')
-                        .removeClass('has-error is-invalid')
-                        .find('.invalid-feedback').remove();
-                    $(node.data("results")).html(function () {
-                        return $(data.content).hide().fadeIn();
-                    });
+                    for (let invalid of node.getElementsByClassName('all-invalid')) {
+                        invalid.classList.add('d-none');
+                        for (let li of invalid.getElementsByTagName('li')) {
+                            li.remove();
+                        }
+                    }
+                    for (let group of node.getElementsByClassName('.form-group')) {
+                        group.classList.add('has-feedback has-success is-valid');
+                        group.classList.remove('has-error is-invalid');
+                        for (let invalid of group.getElementsByClassName('invalid-feedback')) {
+                            invalid.remove();
+                        }
+                    }
+                    if (node.dataset.results) {
+                        let target = document.getElementById(node.dataset.results);
+                        target.innerHTML = data.content;
+                    }
+
+{#
                     if (typeof($(node).data().success) === "function") {   // success function attached to form tag?
                         $(node).data().success();
                     }
+#}
                 } else if (data.result === 'invalid form') {
                     for (let invalid of node.getElementsByClassName('all-invalid')) {
                         invalid.classList.add('d-none');
