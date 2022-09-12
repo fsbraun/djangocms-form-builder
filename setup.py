@@ -8,7 +8,7 @@ REQUIREMENTS = [
     "django-cms>=3.7",
     "djangocms-attributes-field>=1",
     "django-entangled",
-    "django-formset",
+    # "django-formset",
 ]
 
 EXTRA_REQUIREMENTS = {
