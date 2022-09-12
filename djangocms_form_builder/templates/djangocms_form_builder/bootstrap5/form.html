@@ -1,8 +1,9 @@
 {% load static cms_tags sekizai_tags i18n %}
 {% spaceless %}
    {% if form %}
-        <form id="form{{ instance.id|safe }}{{ form.slug }}"{{ instance.get_attributes }}
-              novalidate action="{% url 'dca_forms:ajaxview' instance.id %}"
+        <form id="form{{ instance.id|safe }}{{ form.slug }}"
+              class="djangocms-frontend-ajax-form"
+              novalidate action="{% url 'form_builder:ajaxview' instance.id %}"
               method="post">
             {% csrf_token %}
             {% include 'djangocms_form_builder/ajax_form.html' with form=form instance=instance tracking=instance.tracking_code RECAPTCHA_PUBLIC_KEY=RECAPTCHA_PUBLIC_KEY %}

@@ -14,15 +14,15 @@ class FormsConfig(AppConfig):
     def ready(self):
         """Install the URLs"""
         try:
-            reverse("dca_forms:ajax_form")
+            reverse("form_builder:ajax_form")
         except NoReverseMatch:  # Not installed yet
             urlconf_module = import_module(settings.ROOT_URLCONF)
             urlconf_module.urlpatterns = [
                 path(
-                    "@dca-form-builder/",
+                    "@form-builder/",
                     include(
                         "djangocms_form_builder.urls",
-                        namespace="dca_forms",
+                        namespace="form_builder",
                     ),
                 )
             ] + urlconf_module.urlpatterns

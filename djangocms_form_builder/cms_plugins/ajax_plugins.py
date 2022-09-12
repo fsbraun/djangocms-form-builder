@@ -230,7 +230,6 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
     def render(self, context, instance, placeholder):
         self.instance = instance
         self.request = context["request"]
-
         form = self.get_ajax_form()
         context.update(self.set_context(context, instance, placeholder))
         context.update({"instance": instance, "form": form})
@@ -366,7 +365,6 @@ class FormPlugin(CMSAjaxForm):
 
     def render(self, context, instance, placeholder):
         self.instance = instance
-        # instance.add_classes("djangocms-frontend-ajax-form")
         context["RECAPTCHA_PUBLIC_KEY"] = recaptcha.RECAPTCHA_PUBLIC_KEY
         return super().render(context, instance, placeholder)
 

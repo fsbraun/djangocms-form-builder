@@ -31,7 +31,9 @@ def register_form_view(cls, slug=None):
 class AjaxView(View):
     # @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        if request.is_ajax():
+        print(request.headers)
+        is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+        if request.accepts("application/json"):
             if request.method == "GET" and "get" in self.http_method_names:
                 return self.ajax_get(request, *args, **kwargs)
             elif request.method == "POST" and "post" in self.http_method_names:
