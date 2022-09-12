@@ -91,7 +91,7 @@ class AjaxView(View):
     def ajax_get(self, request, *args, **kwargs):
         if "instance_id" in kwargs:
             plugin, instance = self.plugin_instance(kwargs["instance_id"])
-            if hasattr(plugin, "ajax_get"):  # and request.is_ajax():
+            if hasattr(plugin, "ajax_get"):
                 request.GET = QueryDict(request.body)
                 try:
                     params = (

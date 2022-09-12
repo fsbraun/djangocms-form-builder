@@ -5,26 +5,6 @@ from django.utils.translation import gettext_lazy as _
 
 EMPTY_CHOICE = (("", "-----"),)
 
-EMPTY_FIELDSET = [
-    (
-        None,
-        {
-            "fields": (),
-            "description": _(
-                "There are no further settings for this plugin. Please press save."
-            ),
-        },
-    )
-]
-
-# Only adding block elements
-TAG_CHOICES = getattr(
-    django_settings,
-    "DJANGOCMS_FRONTEND_TAG_CHOICES",
-    ["div", "section", "article", "header", "footer", "aside"],
-)
-TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
-
 ADMIN_CSS = getattr(
     django_settings,
     "DJANGOCMS_FRONTEND_ADMIN_CSS",
@@ -38,13 +18,10 @@ FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FORMS_OPTIONS", {})
 framework = getattr(django_settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
-framework_settings = importlib.import_module(
-    f"djangocms_form_builder.frameworks.{framework}"
-)
 
 SPACER_SIZE_CHOICES = ("mb-3", "Default"),
 
-FORM_TEMPLATE = getattr(framework_settings, "FORM_TEMPLATE", None)
+FORM_TEMPLATE = getattr(django_settings, "FORM_TEMPLATE", None)
 
 theme_render_path = f"{theme}.frameworks.{framework}"
 theme_forms_path = f"{theme}.forms"

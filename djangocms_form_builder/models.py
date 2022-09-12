@@ -123,7 +123,7 @@ class FormField(CMSPlugin):
     """
 
     class Meta:
-        verbose_name = gettext("Form UI item")
+        verbose_name = gettext("Form field item")
 
     ui_item = models.CharField(max_length=30)
     tag_type = TagTypeField(blank=True)

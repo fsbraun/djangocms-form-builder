@@ -4,11 +4,11 @@ from setuptools import find_packages, setup
 from djangocms_form_builder import __version__
 
 REQUIREMENTS = [
-    "Django>=2.2",
+    "Django>=3.8",
     "django-cms>=3.7",
     "djangocms-attributes-field>=1",
-    "django-select2",
-    "django-entangled==0.4",
+    "django-entangled",
+    "django-formset",
 ]
 
 EXTRA_REQUIREMENTS = {

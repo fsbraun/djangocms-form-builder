@@ -41,7 +41,7 @@ def add_placeholder(form):
 @register.simple_tag()
 def render_form(form, **kwargs):
     """Renders form either with crispy_forms if installed and form has helper or with
-    djangocms-frontend's means"""
+    django-formset's means"""
     if crispy_forms_installed:
         helper = kwargs.pop("helper", None) or getattr(form, "helper", None)
         if helper is None and get_option(form, "crispy_form"):

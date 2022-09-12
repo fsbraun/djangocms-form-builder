@@ -95,5 +95,5 @@ jQuery.
 .. |djangocms| image:: https://img.shields.io/badge/django%20CMS-3.8%2B-blue.svg
    :target: https://www.django-cms.org/
 
-.. |djangocms4| image:: https://img.shields.io/badge/django%20CMS-4%2B-blue.svg
+.. |djangocms4| image:: https://img.shields.io/badge/django%20CMS-4-blue.svg
    :target: https://www.django-cms.org/

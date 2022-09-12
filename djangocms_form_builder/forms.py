@@ -12,7 +12,6 @@ from .fields import (
     AttributesFormField,
     ButtonGroup,
     ChoicesFormField,
-    ColoredButtonGroup,
     TagTypeFormField,
 )
 from .helpers import first_choice, mark_safe_lazy
