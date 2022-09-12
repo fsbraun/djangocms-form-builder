@@ -2,7 +2,7 @@
 {% spaceless %}
    {% if form %}
         <form id="form{{ instance.id|safe }}{{ form.slug }}"
-              class="djangocms-frontend-ajax-form"
+              class="djangocms-form-builder-ajax-form"
               novalidate action="{% url 'form_builder:ajaxview' instance.id %}"
               method="post">
             {% csrf_token %}

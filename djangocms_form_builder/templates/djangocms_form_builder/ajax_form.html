@@ -29,15 +29,10 @@
 {% endif %}
 {% addtoblock 'js' %}{% spaceless %}
     <script>
-        function djangocmsfrontend_form(form) {
+        function djangocms_form_builder_form(form) {
             function feedback(node, data) {
                 console.log(data);
                 if (data.result === 'success') {
-{#
-                    if (typeof($(node).data().success) === "function") {
-                        $(node).data().success();
-                    }
-#}
                     node.outerHTML = data.content;
                     node.style.transition='';
                     node.style.opacity = 0;
@@ -61,12 +56,6 @@
                         let target = document.getElementById(node.dataset.results);
                         target.innerHTML = data.content;
                     }
-
-{#
-                    if (typeof($(node).data().success) === "function") {   // success function attached to form tag?
-                        $(node).data().success();
-                    }
-#}
                 } else if (data.result === 'invalid form') {
                     for (let invalid of node.getElementsByClassName('all-invalid')) {
                         invalid.classList.add('d-none');
@@ -165,16 +154,16 @@
     </script>
 {% endspaceless %}{% endaddtoblock %}
 {% addtoblock 'js' %}<script>
-    window.addEventListener('DOMContentLoaded', function (event) {
-        console.log("DOMContentLoaded");
-        var collection = document.getElementsByClassName('djangocms-frontend-ajax-form');
-        console.log("Collection", collection);
-        for (var i = 0; i < collection.length; i++) {
-            djangocmsfrontend_form(collection[i]);
+    (function () {
+        function initForms() {
+            for (let form of document.getElementsByClassName('djangocms-form-builder-ajax-form')) {
+
+                djangocms_form_builder_form(form);
+            }
         }
-    });
-    {% if request.toolbar and request.toolbar.edit_mode_active %}
-        CMS.$(window).on('cms-content-refresh', function () {
-            CMS.$(".djangocms-frontend-ajax-form").each(djangocmsfrontend_form);
-    });{% endif %}
+        window.addEventListener('DOMContentLoaded', initForms);
+        {% if request.toolbar and request.toolbar.edit_mode_active %}
+            CMS.$(window).on('cms-content-refresh', initForms);
+        {% endif %}
+    })();
 </script>{% endaddtoblock %}
