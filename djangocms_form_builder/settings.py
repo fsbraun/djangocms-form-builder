@@ -20,7 +20,7 @@ theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend
 
 
 SPACER_SIZE_CHOICES = ("mb-3", "Default"),
-
+TAG_CHOICES = (("div", "div"),)
 FORM_TEMPLATE = getattr(django_settings, "FORM_TEMPLATE", None)
 
 theme_render_path = f"{theme}.frameworks.{framework}"
