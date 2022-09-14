@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 from djangocms_form_builder import __version__
 
 REQUIREMENTS = [
-    "Django>=3.8",
+    "Django>=3.2",
     "django-cms>=3.7",
     "djangocms-attributes-field>=1",
     "django-entangled",
@@ -28,6 +28,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Framework :: Django",
     "Framework :: Django :: 2.2",
     "Framework :: Django :: 3.2",
@@ -35,6 +36,8 @@ CLASSIFIERS = [
     "Framework :: Django CMS :: 3.8",
     "Framework :: Django CMS :: 3.9",
     "Framework :: Django CMS :: 3.10",
+    "Framework :: Django CMS :: 3.11",
+    "Framework :: Django CMS :: 4.0",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development",
