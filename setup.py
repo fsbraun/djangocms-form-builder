@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 from djangocms_form_builder import __version__
 
 REQUIREMENTS = [
-    "Django>=3.8",
+    "Django>=3.2",
     "django-cms>=3.7",
     "djangocms-attributes-field>=1",
     "django-entangled",
