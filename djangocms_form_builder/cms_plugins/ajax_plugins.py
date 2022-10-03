@@ -348,7 +348,7 @@ class FormPlugin(CMSAjaxForm):
             meta_options["floating_labels"] = True
         meta_options[
             "field_sep"
-        ] = f'mb-{self.instance.form_spacing}'  # TODO: This is bootstrap-specific
+        ] = f'{self.instance.form_spacing}'
         meta_options[
             "redirect"
         ] = self.instance.placeholder.page  # Default behavior: redirect to same page

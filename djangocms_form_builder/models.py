@@ -216,6 +216,9 @@ class EmailField(FormField):
         return self.field_name, forms.EmailField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
+            widget=forms.EmailInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", ""))
+            )
         )
 
 
