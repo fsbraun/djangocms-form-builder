@@ -232,7 +232,12 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
         self.request = context["request"]
         form = self.get_ajax_form()
         context.update(self.set_context(context, instance, placeholder))
-        context.update({"instance": instance, "form": form})
+        context["form_counter"] = context.get("form_counter", 0) + 1
+        context.update({
+            "instance": instance,
+            "form": form,
+            "uid": f"{instance.id}{getattr(form, 'slug', '')}-{context['form_counter']}",
+        })
         return context
 
 
@@ -338,9 +343,7 @@ class FormPlugin(CMSAjaxForm):
 
         # Add recaptcha field in necessary
         if recaptcha.installed and self.instance.captcha_widget:
-            fields[recaptcha.field_name] = recaptcha.get_recaptcha_field(
-                {}  # TODO: Pass config
-            )
+            fields[recaptcha.field_name] = recaptcha.get_recaptcha_field(self.instance.captcha_config)
 
         # Collect meta options for Meta class
         meta_options = dict(form_name=self.instance.form_name)

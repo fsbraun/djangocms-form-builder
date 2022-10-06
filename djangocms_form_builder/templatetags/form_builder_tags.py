@@ -3,7 +3,7 @@ from django.apps import apps
 from django.template.loader import render_to_string
 from django.utils.html import mark_safe
 
-from .. import constants
+from .. import constants, recaptcha
 from ..helpers import get_option
 from ..settings import FORM_TEMPLATE
 
@@ -74,8 +74,8 @@ def attrs_for_widget(widget, item, additional_classes=None):
     return {"class": cls}
 
 
-@register.simple_tag(takes_context=True)
-def render_widget(context, form, form_field, **kwargs):
+@register.simple_tag(takes_context=False)
+def render_widget(form, form_field, **kwargs):
     field = get_bound_field(form, form_field)
     if field is None:
         return ""
@@ -135,12 +135,19 @@ def render_widget(context, form, form_field, **kwargs):
             and floating_labels
         )
     widget = field.as_widget(attrs=widget_attr)
-    label = field.label_tag(attrs=label_attr)
+    label = field.label_tag(attrs=label_attr) if field.label else ""
     if input_first:
         render = f"<div {div_attrs}>{widget}{label}{errors}{help_text}</div>"
     else:
         render = f"<div {div_attrs}>{label}{widget}{errors}{help_text}</div>"
     return mark_safe(render)
+
+
+@register.simple_tag(takes_context=False)
+def render_recaptcha_widget(form):
+    if recaptcha.installed:
+        return render_widget(form, recaptcha.field_name)
+    return ""
 
 
 @register.filter_function

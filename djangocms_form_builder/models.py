@@ -9,7 +9,7 @@ from django.forms.widgets import Input
 from django.utils.html import conditional_escape, mark_safe
 from django.utils.translation import gettext, gettext_lazy as _
 
-from . import _form_registry, actions, constants, get_registered_forms, recaptcha, settings
+from . import actions, get_registered_forms, recaptcha, settings
 from .fields import TagTypeField, AttributesField
 from .helpers import coerce_decimal, first_choice, mark_safe_lazy
 from .entry_model import FormEntry  # NoQA
@@ -70,7 +70,7 @@ class Form(CMSPlugin):
         choices=_available_form_actions,
         default=first_choice(_available_form_actions),
         blank=False,
-        max_length=4*MAX_LENGTH,
+        max_length=4 * MAX_LENGTH,
         # widget=forms.CheckboxSelectMultiple(),
     )
 
@@ -218,7 +218,7 @@ class EmailField(FormField):
             required=self.config.get("field_required", False),
             widget=forms.EmailInput(
                 attrs=dict(placeholder=self.config.get("field_placeholder", ""))
-            )
+            ),
         )
 
 
@@ -276,7 +276,7 @@ class DecimalField(FormField):
             decimal_places=self.config.get("decimal_places", None),
             widget=DecimalField.NumberInput(
                 attrs=dict(placeholder=self.config.get("field_placeholder", "")),
-                decimal_places=self.config.get("decimal_places", None)
+                decimal_places=self.config.get("decimal_places", None),
             ),
         )
 
@@ -329,7 +329,7 @@ class DateField(FormField):
             required=self.config.get("field_required", False),
             widget=DateField.DateInput(
                 attrs=dict(placeholder=self.config.get("field_placeholder", "")),
-           ),
+            ),
         )
 
 
@@ -460,22 +460,3 @@ class SubmitButton(FormField):
     class Meta:
         proxy = True
         verbose_name = _("Submit button")
-
-
-try:
-    """Soft dependency on django-captcha for reCaptchaField"""
-
-    from captcha.fields import ReCaptchaField  # NOQA
-    from captcha.widgets import (  # NOQA
-        ReCaptchaV2Checkbox,
-        ReCaptchaV2Invisible,
-        ReCaptchaV3,
-    )
-except ImportError:
-    ReCaptchaV2Invisible = forms.HiddenInput  # NOQA
-    ReCaptchaV2Checkbox = forms.HiddenInput  # NOQA
-    ReCaptchaV3 = forms.HiddenInput  # NOQA
-
-    class ReCaptchaField:  # NOQA
-        def __init__(self, *args, **kwargs):
-            pass
