@@ -30,6 +30,7 @@ try:  # V4 test?
         "djangocms_versioning",
         "djangocms_alias",
     ]
+    CMS_CONFIRM_VERSION4 = True
 except ImportError:  # Nope
     pass
 
