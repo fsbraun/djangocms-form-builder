@@ -7,10 +7,8 @@ from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import select_template
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
 
 from . import settings
-
 
 global_options = settings.FORM_OPTIONS
 
@@ -89,7 +87,9 @@ def first_choice(choices):
 
 
 def get_template_path(prefix, template, name):
-    return f"djangocms_form_builder/{settings.framework}/{prefix}/{template}/{name}.html"
+    return (
+        f"djangocms_form_builder/{settings.framework}/{prefix}/{template}/{name}.html"
+    )
 
 
 def get_plugin_template(instance, prefix, name, templates):

@@ -4,23 +4,23 @@ from django.core.validators import validate_slug
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
-from . import settings
-
-from .entry_model import FormEntry
-from .helpers import get_option
-from .fields import (
-    AttributesFormField,
-    ButtonGroup,
-    ChoicesFormField,
-    TagTypeFormField,
+from . import (
+    _form_registry,
+    actions,
+    constants,
+    get_registered_forms,
+    recaptcha,
+    settings,
 )
-from .helpers import first_choice, mark_safe_lazy
+from .entry_model import FormEntry
+from .fields import AttributesFormField, ButtonGroup, ChoicesFormField, TagTypeFormField
+from .helpers import first_choice, get_option, mark_safe_lazy
 from .models import FormField
 
-from . import _form_registry, actions, constants, get_registered_forms, recaptcha
 
 class Noop:
     pass
+
 
 def mixin_factory(x):
     return Noop
@@ -284,13 +284,17 @@ class FormFieldMixin(EntangledModelFormMixin):
 
     field_name = forms.CharField(
         label=_("Field name"),
-        help_text=_("Internal field name consisting of letters, numbers, underscores or hyphens"),
+        help_text=_(
+            "Internal field name consisting of letters, numbers, underscores or hyphens"
+        ),
         required=True,
         validators=[validate_slug, validate_form_name],
     )
     field_label = forms.CharField(
         label=_("Label"),
-        help_text=_("Field label shown to the user describing the entity to be entered"),
+        help_text=_(
+            "Field label shown to the user describing the entity to be entered"
+        ),
         required=False,
     )
     field_placeholder = forms.CharField(
@@ -302,7 +306,9 @@ class FormFieldMixin(EntangledModelFormMixin):
         label=_("Required"),
         initial=False,
         required=False,
-        help_text=_("If selected form will not accept submissions with with empty data"),
+        help_text=_(
+            "If selected form will not accept submissions with with empty data"
+        ),
     )
 
 
@@ -569,4 +575,3 @@ class SubmitButtonForm(
         initial=_("Submit"),
         required=False,
     )
-
