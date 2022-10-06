@@ -12,10 +12,10 @@ from django.views.generic.edit import FormMixin
 from sekizai.context import SekizaiContext
 
 from djangocms_form_builder import settings
+
 from .. import forms, models, recaptcha
 from ..forms import SimpleFrontendForm
-from ..helpers import get_option
-from ..helpers import insert_fields, mark_safe_lazy
+from ..helpers import get_option, insert_fields, mark_safe_lazy
 
 
 class CMSAjaxBase(CMSPluginBase):

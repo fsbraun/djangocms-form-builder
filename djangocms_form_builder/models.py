@@ -7,12 +7,13 @@ from django.core.validators import validate_slug
 from django.db import models
 from django.forms.widgets import Input
 from django.utils.html import conditional_escape, mark_safe
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
 from . import actions, get_registered_forms, recaptcha, settings
-from .fields import TagTypeField, AttributesField
-from .helpers import coerce_decimal, first_choice, mark_safe_lazy
 from .entry_model import FormEntry  # NoQA
+from .fields import AttributesField, TagTypeField
+from .helpers import coerce_decimal, first_choice, mark_safe_lazy
 
 MAX_LENGTH = 256
 
@@ -114,6 +115,12 @@ class Form(CMSPlugin):
         ),
     )
     tag_type = TagTypeField()
+
+    def get_short_description(self):
+        return f"({self.form_name})" if self.form_name else "<unnamed>"
+
+    def __str__(self):
+        return f"{self.__class__.__name__} ({self.id})"
 
 
 class FormField(CMSPlugin):

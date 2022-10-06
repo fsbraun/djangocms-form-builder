@@ -3,11 +3,10 @@ from cms.plugin_pool import plugin_pool
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
-from .. import settings, recaptcha
-from .. import forms, models
-from ..helpers import add_plugin, delete_plugin, insert_fields
-
+from .. import forms
 from .. import forms as forms_module
+from .. import models, settings
+from ..helpers import add_plugin, delete_plugin, insert_fields
 from .ajax_plugins import FormPlugin
 
 mixin_factory = settings.get_renderer(forms_module)

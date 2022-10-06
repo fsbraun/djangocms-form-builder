@@ -1,5 +1,4 @@
-from . import legacy
-
+from . import legacy  # noqa F401
 from .ajax_plugins import FormPlugin
 from .form_plugins import (
     BooleanFieldPlugin,

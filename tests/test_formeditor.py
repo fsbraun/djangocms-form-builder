@@ -4,11 +4,9 @@ from cms.api import add_plugin
 from cms.test_utils.testcases import CMSTestCase
 
 from djangocms_form_builder import cms_plugins
-from djangocms_form_builder.cms_plugins.form_plugins import (
-    FormElementPlugin,
-)
+from djangocms_form_builder.cms_plugins.form_plugins import FormElementPlugin
 
-from ..fixtures import TestFixture
+from .fixtures import TestFixture
 
 
 class FormEditorTestCase(TestFixture, CMSTestCase):
@@ -17,15 +15,16 @@ class FormEditorTestCase(TestFixture, CMSTestCase):
             placeholder=self.placeholder,
             plugin_type=cms_plugins.FormPlugin.__name__,
             language=self.language,
-            config=dict(
-                form_selection="",
-                form_name="my-test-form",
-            ),
+            form_selection="",
+            form_name="my-test-form",
         )
-        form.initialize_from_form()
 
         for item, cls in cms_plugins.__dict__.items():
-            if inspect.isclass(cls) and issubclass(cls, FormElementPlugin):
+            if (
+                inspect.isclass(cls)
+                and issubclass(cls, FormElementPlugin)
+                and not issubclass(cls, cms_plugins.ChoicePlugin)
+            ):
                 field = add_plugin(
                     placeholder=self.placeholder,
                     plugin_type=cls.__name__,
@@ -42,8 +41,12 @@ class FormEditorTestCase(TestFixture, CMSTestCase):
         with self.login_user_context(self.superuser):
             response = self.client.get(self.request_url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'action="/@dcf-frontend_forms/1"')
+        self.assertContains(response, 'action="/@form-builder/1"')
         self.assertContains(response, '<input type="hidden" name="csrfmiddlewaretoken"')
         for item, cls in cms_plugins.__dict__.items():
-            if inspect.isclass(cls) and issubclass(cls, FormElementPlugin):
+            if (
+                inspect.isclass(cls)
+                and issubclass(cls, FormElementPlugin)
+                and not issubclass(cls, cms_plugins.ChoicePlugin)
+            ):
                 self.assertContains(response, f'name="field_{item}"')

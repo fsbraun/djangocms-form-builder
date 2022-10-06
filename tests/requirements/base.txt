@@ -1,3 +1,5 @@
+django-filer
+easy-thumbnails
 coverage
 django-app-helper
 django-treebeard<4.5
