@@ -10,10 +10,10 @@ from django.utils.html import conditional_escape, mark_safe
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
-from . import actions, get_registered_forms, recaptcha, settings
+from . import recaptcha, settings
 from .entry_model import FormEntry  # NoQA
 from .fields import AttributesField, TagTypeField
-from .helpers import coerce_decimal, first_choice, mark_safe_lazy
+from .helpers import coerce_decimal, mark_safe_lazy
 
 MAX_LENGTH = 256
 
@@ -60,8 +60,6 @@ class Form(CMSPlugin):
     form_spacing = models.CharField(
         verbose_name=_("Margin between fields"),
         max_length=16,
-        choices=settings.SPACER_SIZE_CHOICES,
-        default=settings.SPACER_SIZE_CHOICES[len(settings.SPACER_SIZE_CHOICES) // 2][0],
     )
 
     form_actions = models.CharField(

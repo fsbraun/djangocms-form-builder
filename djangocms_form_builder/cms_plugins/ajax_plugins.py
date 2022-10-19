@@ -1,3 +1,4 @@
+import copy
 from urllib.parse import urlencode
 
 from cms.plugin_base import CMSPluginBase
@@ -311,7 +312,29 @@ class FormPlugin(CMSAjaxForm):
         if self.instance.child_plugin_instances:
             return self.create_form_class_from_plugins()
         if self.instance.form_selection:
-            return forms._form_registry.get(self.instance.form_selection, None)
+            form_class = forms._form_registry.get(self.instance.form_selection, None)
+            if form_class:
+                # add options from form admin - if the form_class does not already set them
+                additional_options = dict(
+                    floating_labels=self.instance.form_floating_labels,
+                    field_sep=self.instance.form_spacing,
+                    login_required=self.instance.form_login_required,
+                    unique=self.instance.form_unique,
+                    form_actions=self.instance.form_actions,
+                )
+                print(f"{additional_options=}")
+                if hasattr(form_class, "Meta"):
+                    options = getattr(
+                        form_class.Meta,
+                        "_original_options",
+                        getattr(form_class.Meta, "options", {})
+                    )
+                    form_class.Meta._original_options = options  # store original options settings
+                    additional_options.update(options)  # apply them to the form admin's option
+                    form_class.Meta.options = additional_options  # use them
+                else:
+                   form_class.Meta = type("Meta", (), dict(options=additional_options))
+            return form_class
         return None
 
     def create_form_class_from_plugins(self):

@@ -15,7 +15,7 @@ from . import (
 )
 from .entry_model import FormEntry
 from .fields import AttributesFormField, ButtonGroup, ChoicesFormField, TagTypeFormField
-from .helpers import first_choice, get_option, mark_safe_lazy
+from .helpers import get_option, mark_safe_lazy
 from .models import FormField
 
 
@@ -117,11 +117,6 @@ class FormsForm(mixin_factory("Form"), ModelForm):
         help_text=_('Requires "Login required" to be checked to work.'),
     )
 
-    form_floating_labels = forms.BooleanField(
-        label=_("Floating labels"),
-        required=False,
-        initial=False,
-    )
     form_spacing = forms.ChoiceField(
         label=_("Margin between fields"),
         choices=settings.SPACER_SIZE_CHOICES,
