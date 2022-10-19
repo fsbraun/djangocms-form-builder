@@ -128,11 +128,8 @@ class FormsForm(mixin_factory("Form"), ModelForm):
         initial=settings.SPACER_SIZE_CHOICES[len(settings.SPACER_SIZE_CHOICES) // 2][0],
     )
 
-    _available_form_actions = actions.get_registered_actions()
     form_actions = forms.MultipleChoiceField(
         label=_("Actions to be taken after form submission"),
-        choices=_available_form_actions,
-        initial=first_choice(_available_form_actions),
         widget=forms.CheckboxSelectMultiple(),
         required=False,
     )
@@ -180,10 +177,12 @@ class FormsForm(mixin_factory("Form"), ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         registered_forms = get_registered_forms()
+        available_form_actions = actions.get_registered_actions()
         self.fields["form_selection"].widget = (
             forms.Select() if _form_registry else forms.HiddenInput()
         )
         self.fields["form_selection"].choices = settings.EMPTY_CHOICE + registered_forms
+        self.fields["form_actions"].choices = available_form_actions
 
     def clean(self):
         if self.cleaned_data["form_selection"] == "":

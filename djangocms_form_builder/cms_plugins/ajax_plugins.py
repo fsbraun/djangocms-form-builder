@@ -86,18 +86,11 @@ class AjaxFormMixin(FormMixin):
                     get_option(form, render_success), context.flatten(), self.request
                 ),
             )
-        elif redirect:
+        else:
             errors, result, redir, content = (
                 [],
                 "success",
-                redirect,
-                "",
-            )
-        else:
-            errors, result, redir, content = (
-                [_("No content in response from")],
-                "error",
-                "",
+                redirect or "",
                 "",
             )
         redirect = redirect or redir

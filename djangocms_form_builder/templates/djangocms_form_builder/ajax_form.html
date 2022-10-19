@@ -37,15 +37,17 @@
                 } else if (data.result === 'result') {
                     for (let invalid of node.getElementsByClassName('all-invalid')) {
                         invalid.classList.add('d-none');
-                        for (let li of invalid.getElementsByTagName('li')) {
-                            li.remove();
+                        let li = invalid.getElementsByTagName('li');
+                        while (li !== undefined && li.length > 0) {
+                            li[0].remove();
                         }
                     }
                     for (let group of node.getElementsByClassName('.form-group')) {
                         group.classList.add('has-feedback has-success is-valid');
                         group.classList.remove('has-error is-invalid');
-                        for (let invalid of group.getElementsByClassName('invalid-feedback')) {
-                            invalid.remove();
+                        let invalid = group.getElementsByClassName('invalid-feedback');
+                        while (invalid !== undefined && invalid.length > 0) {
+                            invalid[0].remove();
                         }
                     }
                     if (node.dataset.results) {
@@ -55,12 +57,14 @@
                 } else if (data.result === 'invalid form') {
                     for (let invalid of node.getElementsByClassName('all-invalid')) {
                         invalid.classList.add('d-none');
-                        for (let li of invalid.getElementsByTagName("li")) {
-                            li.remove();
+                        let li = invalid.getElementsByTagName('li');
+                        while (li !== undefined && li.length > 0) {
+                            li[0].remove();
                         }
                     }
-                    for (let invalid of node.getElementsByClassName('invalid-feedback')) {
-                        invalid.remove();
+                    let invalid = node.getElementsByClassName('invalid-feedback');
+                    while (invalid !== undefined && invalid.length > 0) {
+                        invalid[0].remove();
                     }
                     for (const [key, value] of Object.entries(data.field_errors)) {
                         for (const err of value) {
@@ -87,14 +91,15 @@
                             collapse.classList.add('show');
                         }
                     }
-                    // $(node).find(".form-div").html(data.html);  {# div#data{{instance.id}}{{form.slug}} #}
                     node.classList.add('was-validated');
                 } else if (data.result === 'error') {
                     alert(data.errors[0]);
                 }
                 if ('redirect' in data) {
-                    if (data.redirect !== '' && data.redirect !== 'result')
-                    window.location.href = data.redirect;
+                    if (data.redirect !== '' && data.redirect !== 'result') {
+                        window.location.href = data.redirect;
+                    } else
+                        window.location.reload();
                 }
             }
 

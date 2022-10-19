@@ -64,12 +64,9 @@ class Form(CMSPlugin):
         default=settings.SPACER_SIZE_CHOICES[len(settings.SPACER_SIZE_CHOICES) // 2][0],
     )
 
-    _available_form_actions = actions.get_registered_actions()
     form_actions = models.CharField(
         verbose_name=_("Actions to be taken after form submission"),
-        choices=_available_form_actions,
-        default=first_choice(_available_form_actions),
-        blank=False,
+        blank=True,
         max_length=4 * MAX_LENGTH,
         # widget=forms.CheckboxSelectMultiple(),
     )
