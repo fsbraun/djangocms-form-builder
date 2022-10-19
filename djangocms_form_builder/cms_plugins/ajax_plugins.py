@@ -1,4 +1,3 @@
-import copy
 from urllib.parse import urlencode
 
 from cms.plugin_base import CMSPluginBase
@@ -322,7 +321,6 @@ class FormPlugin(CMSAjaxForm):
                     unique=self.instance.form_unique,
                     form_actions=self.instance.form_actions,
                 )
-                print(f"{additional_options=}")
                 if hasattr(form_class, "Meta"):
                     options = getattr(
                         form_class.Meta,
@@ -333,7 +331,7 @@ class FormPlugin(CMSAjaxForm):
                     additional_options.update(options)  # apply them to the form admin's option
                     form_class.Meta.options = additional_options  # use them
                 else:
-                   form_class.Meta = type("Meta", (), dict(options=additional_options))
+                    form_class.Meta = type("Meta", (), dict(options=additional_options))
             return form_class
         return None
 
