@@ -1,5 +1,5 @@
 {% load sekizai_tags i18n form_builder_tags cms_tags %}{% spaceless %}
-    <div id="data{{ instance.id|safe }}{{ form.slug }}" class="form-div{% if form.bound %} was-validated{% endif %}">
+    <div id="data{{ uid }}" class="form-div{% if form.bound %} was-validated{% endif %}">
         <div class="all-invalid alert alert-block alert-danger d-none">
             <ul class="m-0">
             </ul>
@@ -10,11 +10,7 @@
             {% render_form form %}
         {% endfor %}
         {% if instance.child_plugin_instances %}
-            {% if instance.captcha_widget == "v2-checkbox" %}
-                <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
-            {% elif instance.captcha_widget == "v2-invisible" %}
-                <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}" data-size="invisible"></div>
-            {% endif %}
+            {% render_recaptcha_widget form  %}
         {% endif %}
     </div>{% endspaceless %}
 {% if instance.config.captcha_widget %}
@@ -41,15 +37,17 @@
                 } else if (data.result === 'result') {
                     for (let invalid of node.getElementsByClassName('all-invalid')) {
                         invalid.classList.add('d-none');
-                        for (let li of invalid.getElementsByTagName('li')) {
-                            li.remove();
+                        let li = invalid.getElementsByTagName('li');
+                        while (li !== undefined && li.length > 0) {
+                            li[0].remove();
                         }
                     }
                     for (let group of node.getElementsByClassName('.form-group')) {
                         group.classList.add('has-feedback has-success is-valid');
                         group.classList.remove('has-error is-invalid');
-                        for (let invalid of group.getElementsByClassName('invalid-feedback')) {
-                            invalid.remove();
+                        let invalid = group.getElementsByClassName('invalid-feedback');
+                        while (invalid !== undefined && invalid.length > 0) {
+                            invalid[0].remove();
                         }
                     }
                     if (node.dataset.results) {
@@ -59,12 +57,14 @@
                 } else if (data.result === 'invalid form') {
                     for (let invalid of node.getElementsByClassName('all-invalid')) {
                         invalid.classList.add('d-none');
-                        for (let li of invalid.getElementsByTagName("li")) {
-                            li.remove();
+                        let li = invalid.getElementsByTagName('li');
+                        while (li !== undefined && li.length > 0) {
+                            li[0].remove();
                         }
                     }
-                    for (let invalid of node.getElementsByClassName('invalid-feedback')) {
-                        invalid.remove();
+                    let invalid = node.getElementsByClassName('invalid-feedback');
+                    while (invalid !== undefined && invalid.length > 0) {
+                        invalid[0].remove();
                     }
                     for (const [key, value] of Object.entries(data.field_errors)) {
                         for (const err of value) {
@@ -88,17 +88,18 @@
                     // make invalid fields visible in collapsed sections
                     for(let collapse of node.getElementsByClassName('collapse')) {
                         if (collapse.getElementsByClassName('invalid-feedback').length > 0) {
-                            collapse.classList.adD('show');
+                            collapse.classList.add('show');
                         }
                     }
-                    // $(node).find(".form-div").html(data.html);  {# div#data{{instance.id}}{{form.slug}} #}
                     node.classList.add('was-validated');
                 } else if (data.result === 'error') {
                     alert(data.errors[0]);
                 }
                 if ('redirect' in data) {
-                    if (data.redirect !== '' && data.redirect !== 'result')
-                    window.location.href = data.redirect;
+                    if (data.redirect !== '' && data.redirect !== 'result') {
+                        window.location.href = data.redirect;
+                    } else
+                        window.location.reload();
                 }
             }
 
@@ -107,23 +108,25 @@
                     method: 'POST',
                     body: new URLSearchParams(new FormData(node)),
                     }
+                ).then(function (response) {
+                    return response.json();
+                    }
                 ).then(function (data) {
-                    return data.json();
-                }).then(function (json) {
-                    feedback(node, json);
+                    feedback(node, data);
                 }).catch(function (json) {
                     console.log(json);
                     alert("{% trans 'Network connection or server error. Please try again later. We apologize for the inconvenience.' %}");
                 });
-
             }
 
-            console.log("Form", form);
             let recaptcha = form.getElementsByClassName('g-recaptcha');
             if (recaptcha.length === 1) {
+                let submitButton = form.querySelector('input[type="submit"]');
+                submitButton.setAttribute("disabled", "");
                 let checkExist = setInterval(function () {
                     if (window.hasOwnProperty("recaptcha_loaded")) {
                         clearInterval(checkExist);
+                        submitButton.removeAttribute("disabled");
                         let gid = grecaptcha.render(recaptcha[0], {
                             "callback": function (token) {
                                 form.getElementsByClassName("g-recaptcha-response")[0].value = token;
@@ -135,10 +138,10 @@
                             form.dataset.submitEvent = true;
                             form.addEventListener('submit', function (event) {
                                 event.preventDefault();
+                                console.log("recaptcha submit")
                                 grecaptcha.execute(gid);
                             });
                         }
-
                     }
                 }, 100);
             } else {

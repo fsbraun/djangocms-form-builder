@@ -29,10 +29,8 @@ try:  # V4 test?
     INSTALLED_APPS += [
         "djangocms_versioning",
         "djangocms_alias",
-        "djangocms_url_manager",
-        "djangocms_pageadmin",
-        "djangocms_version_locking",
     ]
+    CMS_CONFIRM_VERSION4 = True
 except ImportError:  # Nope
     pass
 

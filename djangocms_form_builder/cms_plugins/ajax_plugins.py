@@ -12,10 +12,10 @@ from django.views.generic.edit import FormMixin
 from sekizai.context import SekizaiContext
 
 from djangocms_form_builder import settings
+
 from .. import forms, models, recaptcha
 from ..forms import SimpleFrontendForm
-from ..helpers import get_option
-from ..helpers import insert_fields, mark_safe_lazy
+from ..helpers import get_option, insert_fields, mark_safe_lazy
 
 
 class CMSAjaxBase(CMSPluginBase):
@@ -86,18 +86,11 @@ class AjaxFormMixin(FormMixin):
                     get_option(form, render_success), context.flatten(), self.request
                 ),
             )
-        elif redirect:
+        else:
             errors, result, redir, content = (
                 [],
                 "success",
-                redirect,
-                "",
-            )
-        else:
-            errors, result, redir, content = (
-                [_("No content in response from")],
-                "error",
-                "",
+                redirect or "",
                 "",
             )
         redirect = redirect or redir
@@ -232,7 +225,12 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
         self.request = context["request"]
         form = self.get_ajax_form()
         context.update(self.set_context(context, instance, placeholder))
-        context.update({"instance": instance, "form": form})
+        context["form_counter"] = context.get("form_counter", 0) + 1
+        context.update({
+            "instance": instance,
+            "form": form,
+            "uid": f"{instance.id}{getattr(form, 'slug', '')}-{context['form_counter']}",
+        })
         return context
 
 
@@ -240,8 +238,8 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
 class FormPlugin(CMSAjaxForm):
     name = _("Form")
     model = models.Form
+    form = forms.FormsForm
 
-    # form = forms.FormsForm
     render_template = f"djangocms_form_builder/{settings.framework}/form.html"
     change_form_template = "djangocms_frontend/admin/base.html"
     allow_children = True
@@ -313,7 +311,28 @@ class FormPlugin(CMSAjaxForm):
         if self.instance.child_plugin_instances:
             return self.create_form_class_from_plugins()
         if self.instance.form_selection:
-            return forms._form_registry.get(self.instance.form_selection, None)
+            form_class = forms._form_registry.get(self.instance.form_selection, None)
+            if form_class:
+                # add options from form admin - if the form_class does not already set them
+                additional_options = dict(
+                    floating_labels=self.instance.form_floating_labels,
+                    field_sep=self.instance.form_spacing,
+                    login_required=self.instance.form_login_required,
+                    unique=self.instance.form_unique,
+                    form_actions=self.instance.form_actions,
+                )
+                if hasattr(form_class, "Meta"):
+                    options = getattr(
+                        form_class.Meta,
+                        "_original_options",
+                        getattr(form_class.Meta, "options", {})
+                    )
+                    form_class.Meta._original_options = options  # store original options settings
+                    additional_options.update(options)  # apply them to the form admin's option
+                    form_class.Meta.options = additional_options  # use them
+                else:
+                    form_class.Meta = type("Meta", (), dict(options=additional_options))
+            return form_class
         return None
 
     def create_form_class_from_plugins(self):
@@ -338,9 +357,7 @@ class FormPlugin(CMSAjaxForm):
 
         # Add recaptcha field in necessary
         if recaptcha.installed and self.instance.captcha_widget:
-            fields[recaptcha.field_name] = recaptcha.get_recaptcha_field(
-                {}  # TODO: Pass config
-            )
+            fields[recaptcha.field_name] = recaptcha.get_recaptcha_field(self.instance.captcha_config)
 
         # Collect meta options for Meta class
         meta_options = dict(form_name=self.instance.form_name)
@@ -348,7 +365,7 @@ class FormPlugin(CMSAjaxForm):
             meta_options["floating_labels"] = True
         meta_options[
             "field_sep"
-        ] = f'mb-{self.instance.form_spacing}'  # TODO: This is bootstrap-specific
+        ] = f'{self.instance.form_spacing}'
         meta_options[
             "redirect"
         ] = self.instance.placeholder.page  # Default behavior: redirect to same page

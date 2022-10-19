@@ -1,7 +1,7 @@
 {% load static cms_tags sekizai_tags i18n %}
 {% spaceless %}
    {% if form %}
-        <form id="form{{ instance.id|safe }}{{ form.slug }}"
+        <form id="form{{ uid }}"
               class="djangocms-form-builder-ajax-form"
               novalidate action="{% url 'form_builder:ajaxview' instance.id %}"
               method="post">

@@ -7,12 +7,13 @@ from django.core.validators import validate_slug
 from django.db import models
 from django.forms.widgets import Input
 from django.utils.html import conditional_escape, mark_safe
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 
-from . import _form_registry, actions, constants, get_registered_forms, recaptcha, settings
-from .fields import TagTypeField, AttributesField
-from .helpers import coerce_decimal, first_choice, mark_safe_lazy
+from . import recaptcha, settings
 from .entry_model import FormEntry  # NoQA
+from .fields import AttributesField, TagTypeField
+from .helpers import coerce_decimal, mark_safe_lazy
 
 MAX_LENGTH = 256
 
@@ -26,7 +27,6 @@ class Form(CMSPlugin):
         max_length=MAX_LENGTH,
         blank=True,
         default="",
-        choices=get_registered_forms(),
     )
     form_name = models.CharField(
         verbose_name=_("Form name"),
@@ -60,17 +60,12 @@ class Form(CMSPlugin):
     form_spacing = models.CharField(
         verbose_name=_("Margin between fields"),
         max_length=16,
-        choices=settings.SPACER_SIZE_CHOICES,
-        default=settings.SPACER_SIZE_CHOICES[len(settings.SPACER_SIZE_CHOICES) // 2][0],
     )
 
-    _available_form_actions = actions.get_registered_actions()
     form_actions = models.CharField(
         verbose_name=_("Actions to be taken after form submission"),
-        choices=_available_form_actions,
-        default=first_choice(_available_form_actions),
-        blank=False,
-        max_length=4*MAX_LENGTH,
+        blank=True,
+        max_length=4 * MAX_LENGTH,
         # widget=forms.CheckboxSelectMultiple(),
     )
 
@@ -114,6 +109,12 @@ class Form(CMSPlugin):
         ),
     )
     tag_type = TagTypeField()
+
+    def get_short_description(self):
+        return f"({self.form_name})" if self.form_name else "<unnamed>"
+
+    def __str__(self):
+        return f"{self.__class__.__name__} ({self.id})"
 
 
 class FormField(CMSPlugin):
@@ -216,6 +217,9 @@ class EmailField(FormField):
         return self.field_name, forms.EmailField(
             label=self.config.get("field_label", ""),
             required=self.config.get("field_required", False),
+            widget=forms.EmailInput(
+                attrs=dict(placeholder=self.config.get("field_placeholder", ""))
+            ),
         )
 
 
@@ -273,7 +277,7 @@ class DecimalField(FormField):
             decimal_places=self.config.get("decimal_places", None),
             widget=DecimalField.NumberInput(
                 attrs=dict(placeholder=self.config.get("field_placeholder", "")),
-                decimal_places=self.config.get("decimal_places", None)
+                decimal_places=self.config.get("decimal_places", None),
             ),
         )
 
@@ -326,7 +330,7 @@ class DateField(FormField):
             required=self.config.get("field_required", False),
             widget=DateField.DateInput(
                 attrs=dict(placeholder=self.config.get("field_placeholder", "")),
-           ),
+            ),
         )
 
 
@@ -457,22 +461,3 @@ class SubmitButton(FormField):
     class Meta:
         proxy = True
         verbose_name = _("Submit button")
-
-
-try:
-    """Soft dependency on django-captcha for reCaptchaField"""
-
-    from captcha.fields import ReCaptchaField  # NOQA
-    from captcha.widgets import (  # NOQA
-        ReCaptchaV2Checkbox,
-        ReCaptchaV2Invisible,
-        ReCaptchaV3,
-    )
-except ImportError:
-    ReCaptchaV2Invisible = forms.HiddenInput  # NOQA
-    ReCaptchaV2Checkbox = forms.HiddenInput  # NOQA
-    ReCaptchaV3 = forms.HiddenInput  # NOQA
-
-    class ReCaptchaField:  # NOQA
-        def __init__(self, *args, **kwargs):
-            pass

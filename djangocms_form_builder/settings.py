@@ -1,7 +1,6 @@
 import importlib
 
 from django.conf import settings as django_settings
-from django.utils.translation import gettext_lazy as _
 
 EMPTY_CHOICE = (("", "-----"),)
 
@@ -19,9 +18,13 @@ framework = getattr(django_settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5
 theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
 
-SPACER_SIZE_CHOICES = ("mb-3", "Default"),
+SPACER_SIZE_CHOICES = (("mb-3", "Default"),)
 TAG_CHOICES = (("div", "div"),)
-FORM_TEMPLATE = getattr(django_settings, "FORM_TEMPLATE", None)
+FORM_TEMPLATE = getattr(
+    django_settings,
+    "FORM_TEMPLATE",
+    f"djangocms_form_builder/{framework}/render/form.html",
+)
 
 theme_render_path = f"{theme}.frameworks.{framework}"
 theme_forms_path = f"{theme}.forms"

@@ -1,10 +1,11 @@
 from django import forms
+from django.apps import apps
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from .helpers import coerce_decimal
 
-try:
+if apps.is_installed("captcha"):
     """Soft dependency on django-captcha for reCaptchaField"""
 
     from captcha.fields import ReCaptchaField  # NOQA
@@ -16,7 +17,7 @@ try:
 
     installed = True
 
-except ImportError:
+else:
     ReCaptchaV2Invisible = forms.HiddenInput  # NOQA
     ReCaptchaV2Checkbox = forms.HiddenInput  # NOQA
     ReCaptchaV3 = forms.HiddenInput  # NOQA
@@ -57,7 +58,10 @@ def get_recaptcha_field(config):
         widget_params["attrs"]["required_score"] = coerce_decimal(
             config.get("captcha_requirement", 0.5)
         )
+    if not widget_params["api_params"]:
+        del widget_params["api_params"]
     field = ReCaptchaField(
+        label="",
         widget=WIDGETS[config.get("captcha_widget", "v2-invisible")](
             **widget_params,
         ),

@@ -3,11 +3,10 @@ from cms.plugin_pool import plugin_pool
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
-from .. import settings
-from .. import forms, models
-from ..helpers import add_plugin, delete_plugin, insert_fields
-
+from .. import forms
 from .. import forms as forms_module
+from .. import models, settings
+from ..helpers import add_plugin, delete_plugin, insert_fields
 from .ajax_plugins import FormPlugin
 
 mixin_factory = settings.get_renderer(forms_module)
@@ -240,8 +239,17 @@ class SubmitPlugin(mixin_factory("SubmitButton"), FormElementPlugin):
     name = _("Submit button")
     module = _("Forms")
 
-    fieldsets = ((None, {"fields": (                    ("field_name", "field_label"),
-("submit_cta",),)}),)
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    ("field_name", "field_label"),
+                    ("submit_cta",),
+                )
+            },
+        ),
+    )
     model = models.SubmitButton
     form = forms.SubmitButtonForm
 

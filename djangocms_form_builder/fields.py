@@ -19,15 +19,16 @@ class TemplateChoiceMixin:
             choices = template_field.choices
             instance = kwargs.get("instance", None)
             if len(choices) == 1 and (
-                instance is None
-                or instance.config.get("template", "") == choices[0][0]
+                instance is None or instance.config.get("template", "") == choices[0][0]
             ):
                 template_field.widget = forms.HiddenInput()
 
 
 class ButtonGroup(forms.RadioSelect):
     template_name = "djangocms_form_builder/admin/widgets/button_group.html"
-    option_template_name = "djangocms_form_builder/admin/widgets/button_group_option.html"
+    option_template_name = (
+        "djangocms_form_builder/admin/widgets/button_group_option.html"
+    )
 
     class Media:
         css = {"all": ("djangocms_form_builder/css/button_group.css",)}
@@ -177,4 +178,3 @@ class TagTypeFormField(forms.ChoiceField):
         kwargs.setdefault("required", False)
         kwargs.setdefault("widget", ButtonGroup(attrs=dict(property="text")))
         super().__init__(*args, **kwargs)
-

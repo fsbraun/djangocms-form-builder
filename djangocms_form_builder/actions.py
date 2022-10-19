@@ -31,7 +31,7 @@ def register(action_class):
         )
     if not action_class.verbose_name:
         raise ImproperlyConfigured(
-            "FormActions need to have a verbose_name property to be registered", sta
+            "FormActions need to have a verbose_name property to be registered",
         )
     hash = hashlib.sha1(action_class.__name__.encode("utf-8")).hexdigest()
     _action_registry.update({hash: action_class})

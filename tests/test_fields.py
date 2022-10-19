@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from djangocms_frontend.fields import AttributesField, TagTypeField
+from djangocms_form_builder.fields import AttributesField, TagTypeField
 
 
 class FieldsTestCase(TestCase):
@@ -14,14 +14,7 @@ class FieldsTestCase(TestCase):
         self.assertEqual(field.verbose_name, "Tag type")
         self.assertEqual(
             field.choices,
-            (
-                ("div", "div"),
-                ("section", "section"),
-                ("article", "article"),
-                ("header", "header"),
-                ("footer", "footer"),
-                ("aside", "aside"),
-            ),
+            (("div", "div"),),
         )
         self.assertEqual(field.default, "div")
         self.assertEqual(field.max_length, 255)

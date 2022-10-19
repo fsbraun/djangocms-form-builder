@@ -1,26 +1,27 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_slug
+from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
-from . import settings
-
-from .entry_model import FormEntry
-from .helpers import get_option
-from .fields import (
-    AttributesFormField,
-    ButtonGroup,
-    ChoicesFormField,
-    TagTypeFormField,
+from . import (
+    _form_registry,
+    actions,
+    constants,
+    get_registered_forms,
+    recaptcha,
+    settings,
 )
-from .helpers import first_choice, mark_safe_lazy
+from .entry_model import FormEntry
+from .fields import AttributesFormField, ButtonGroup, ChoicesFormField, TagTypeFormField
+from .helpers import get_option, mark_safe_lazy
 from .models import FormField
 
-from . import _form_registry, actions, constants, get_registered_forms, recaptcha
 
 class Noop:
     pass
+
 
 def mixin_factory(x):
     return Noop
@@ -60,7 +61,7 @@ class SimpleFrontendForm(forms.Form):
             results[None] = _("No action registered")
 
 
-class FormsForm(mixin_factory("Form"), EntangledModelForm):
+class FormsForm(mixin_factory("Form"), ModelForm):
     """
     Components > "Forms" Plugin
     https://getbootstrap.com/docs/5.1/forms/overview/
@@ -68,6 +69,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
 
     class Meta:
         model = FormField
+        exclude = ()
         entangled_fields = {
             "config": [
                 "form_selection",
@@ -115,24 +117,16 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         help_text=_('Requires "Login required" to be checked to work.'),
     )
 
-    form_floating_labels = forms.BooleanField(
-        label=_("Floating labels"),
-        required=False,
-        initial=False,
-    )
     form_spacing = forms.ChoiceField(
         label=_("Margin between fields"),
         choices=settings.SPACER_SIZE_CHOICES,
         initial=settings.SPACER_SIZE_CHOICES[len(settings.SPACER_SIZE_CHOICES) // 2][0],
     )
 
-    _available_form_actions = actions.get_registered_actions()
     form_actions = forms.MultipleChoiceField(
         label=_("Actions to be taken after form submission"),
-        choices=_available_form_actions,
-        initial=first_choice(_available_form_actions),
-        required=True,
         widget=forms.CheckboxSelectMultiple(),
+        required=False,
     )
 
     attributes = AttributesFormField()
@@ -178,10 +172,12 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         registered_forms = get_registered_forms()
+        available_form_actions = actions.get_registered_actions()
         self.fields["form_selection"].widget = (
             forms.Select() if _form_registry else forms.HiddenInput()
         )
-        self.fields["form_selection"].choices = registered_forms
+        self.fields["form_selection"].choices = settings.EMPTY_CHOICE + registered_forms
+        self.fields["form_actions"].choices = available_form_actions
 
     def clean(self):
         if self.cleaned_data["form_selection"] == "":
@@ -220,7 +216,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
                             ),
                         }
                     )
-        else:
+        elif not self.cleaned_data["form_selection"]:
             raise ValidationError(
                 {
                     "form_actions": _(
@@ -284,13 +280,17 @@ class FormFieldMixin(EntangledModelFormMixin):
 
     field_name = forms.CharField(
         label=_("Field name"),
-        help_text=_("Internal field name consisting of letters, numbers, underscores or hyphens"),
+        help_text=_(
+            "Internal field name consisting of letters, numbers, underscores or hyphens"
+        ),
         required=True,
         validators=[validate_slug, validate_form_name],
     )
     field_label = forms.CharField(
         label=_("Label"),
-        help_text=_("Field label shown to the user describing the entity to be entered"),
+        help_text=_(
+            "Field label shown to the user describing the entity to be entered"
+        ),
         required=False,
     )
     field_placeholder = forms.CharField(
@@ -302,7 +302,9 @@ class FormFieldMixin(EntangledModelFormMixin):
         label=_("Required"),
         initial=False,
         required=False,
-        help_text=_("If selected form will not accept submissions with with empty data"),
+        help_text=_(
+            "If selected form will not accept submissions with with empty data"
+        ),
     )
 
 
@@ -569,4 +571,3 @@ class SubmitButtonForm(
         initial=_("Submit"),
         required=False,
     )
-
