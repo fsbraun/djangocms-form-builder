@@ -29,6 +29,7 @@ jobs:
       - name: Build docs
         run: |
           cd docs
+          make install
           make html
 
   spelling:
