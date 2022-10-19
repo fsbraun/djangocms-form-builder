@@ -27,7 +27,6 @@ class Form(CMSPlugin):
         max_length=MAX_LENGTH,
         blank=True,
         default="",
-        choices=get_registered_forms(),
     )
     form_name = models.CharField(
         verbose_name=_("Form name"),

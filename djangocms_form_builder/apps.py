@@ -14,7 +14,7 @@ class FormsConfig(AppConfig):
     def ready(self):
         """Install the URLs"""
         try:
-            reverse("form_builder:ajax_form")
+            reverse("form_builder:ajaxview", args=(1,))
         except NoReverseMatch:  # Not installed yet
             urlconf_module = import_module(settings.ROOT_URLCONF)
             urlconf_module.urlpatterns = [
@@ -27,3 +27,4 @@ class FormsConfig(AppConfig):
                 )
             ] + urlconf_module.urlpatterns
             clear_url_caches()
+            reverse("form_builder:ajaxview", args=(1,))

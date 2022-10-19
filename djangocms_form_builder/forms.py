@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_slug
+from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
@@ -60,7 +61,7 @@ class SimpleFrontendForm(forms.Form):
             results[None] = _("No action registered")
 
 
-class FormsForm(mixin_factory("Form"), EntangledModelForm):
+class FormsForm(mixin_factory("Form"), ModelForm):
     """
     Components > "Forms" Plugin
     https://getbootstrap.com/docs/5.1/forms/overview/
@@ -68,6 +69,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
 
     class Meta:
         model = FormField
+        exclude = ()
         entangled_fields = {
             "config": [
                 "form_selection",
@@ -131,8 +133,8 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         label=_("Actions to be taken after form submission"),
         choices=_available_form_actions,
         initial=first_choice(_available_form_actions),
-        required=True,
         widget=forms.CheckboxSelectMultiple(),
+        required=False,
     )
 
     attributes = AttributesFormField()
@@ -181,7 +183,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         self.fields["form_selection"].widget = (
             forms.Select() if _form_registry else forms.HiddenInput()
         )
-        self.fields["form_selection"].choices = registered_forms
+        self.fields["form_selection"].choices = settings.EMPTY_CHOICE + registered_forms
 
     def clean(self):
         if self.cleaned_data["form_selection"] == "":
@@ -220,7 +222,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
                             ),
                         }
                     )
-        else:
+        elif not self.cleaned_data["form_selection"]:
             raise ValidationError(
                 {
                     "form_actions": _(

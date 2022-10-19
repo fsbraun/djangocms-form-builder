@@ -245,8 +245,8 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
 class FormPlugin(CMSAjaxForm):
     name = _("Form")
     model = models.Form
+    form = forms.FormsForm
 
-    # form = forms.FormsForm
     render_template = f"djangocms_form_builder/{settings.framework}/form.html"
     change_form_template = "djangocms_frontend/admin/base.html"
     allow_children = True
