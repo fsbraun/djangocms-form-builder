@@ -29,7 +29,7 @@ jobs:
             requirements-file: dj40_cms311.txt
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: '2'
 
@@ -42,4 +42,5 @@ jobs:
         pip install -r tests/requirements/${{ matrix.requirements-file }}
         coverage run setup.py test
     - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
+
