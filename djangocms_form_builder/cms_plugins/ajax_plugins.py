@@ -86,11 +86,18 @@ class AjaxFormMixin(FormMixin):
                     get_option(form, render_success), context.flatten(), self.request
                 ),
             )
-        else:
+        elif redirect:
             errors, result, redir, content = (
                 [],
                 "success",
-                redirect or "",
+                redirect,
+                "",
+            )
+        else:
+            errors, result, redir, content = (
+                [_("No content in response from")],
+                "error",
+                "",
                 "",
             )
         redirect = redirect or redir
@@ -238,8 +245,8 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
 class FormPlugin(CMSAjaxForm):
     name = _("Form")
     model = models.Form
-    form = forms.FormsForm
 
+    # form = forms.FormsForm
     render_template = f"djangocms_form_builder/{settings.framework}/form.html"
     change_form_template = "djangocms_frontend/admin/base.html"
     allow_children = True
@@ -269,15 +276,17 @@ class FormPlugin(CMSAjaxForm):
         ),
     ]
 
-    # @classmethod
-    # def get_parent_classes(cls, slot, page, instance=None):   # TODO Should avoid nested forms -> not working
-    #     """Only valid if not inside form"""
-    #     parent = instance
-    #     while parent is not None:
-    #         if parent.plugin_type == FormPlugin.__name__:
-    #             return [""]
-    #         parent = parent.parent
-    #     return super().get_parent_classes(slot, page, instance)
+    cache_parent_classes = False
+
+    @classmethod
+    def get_parent_classes(cls, slot, page, instance=None):
+        """Only valid if not inside form"""
+        parent = instance
+        while parent is not None:
+            if parent.plugin_type == FormPlugin.__name__:
+                return [""]
+            parent = parent.parent
+        return super().get_parent_classes(slot, page, instance)
 
     def get_fieldsets(self, request, obj=None):
         if recaptcha.installed:
@@ -311,28 +320,7 @@ class FormPlugin(CMSAjaxForm):
         if self.instance.child_plugin_instances:
             return self.create_form_class_from_plugins()
         if self.instance.form_selection:
-            form_class = forms._form_registry.get(self.instance.form_selection, None)
-            if form_class:
-                # add options from form admin - if the form_class does not already set them
-                additional_options = dict(
-                    floating_labels=self.instance.form_floating_labels,
-                    field_sep=self.instance.form_spacing,
-                    login_required=self.instance.form_login_required,
-                    unique=self.instance.form_unique,
-                    form_actions=self.instance.form_actions,
-                )
-                if hasattr(form_class, "Meta"):
-                    options = getattr(
-                        form_class.Meta,
-                        "_original_options",
-                        getattr(form_class.Meta, "options", {})
-                    )
-                    form_class.Meta._original_options = options  # store original options settings
-                    additional_options.update(options)  # apply them to the form admin's option
-                    form_class.Meta.options = additional_options  # use them
-                else:
-                    form_class.Meta = type("Meta", (), dict(options=additional_options))
-            return form_class
+            return forms._form_registry.get(self.instance.form_selection, None)
         return None
 
     def create_form_class_from_plugins(self):
