@@ -121,6 +121,7 @@ class FormsForm(mixin_factory("Form"), ModelForm):
         label=_("Margin between fields"),
         choices=settings.SPACER_SIZE_CHOICES,
         initial=settings.SPACER_SIZE_CHOICES[len(settings.SPACER_SIZE_CHOICES) // 2][0],
+        required=False,
     )
 
     form_actions = forms.MultipleChoiceField(
