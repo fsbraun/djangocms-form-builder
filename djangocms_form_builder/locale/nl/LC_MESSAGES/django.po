@@ -3,9 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Fabian Braun <fsbraun@gmx.de>, 2023
-# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -13,51 +10,50 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-24 14:41+0100\n"
 "PO-Revision-Date: 2023-01-24 13:42+0000\n"
-"Last-Translator: Fabian Braun <fsbraun@gmx.de>, 2023\n"
-"Language-Team: German (https://www.transifex.com/divio/teams/58664/de/)\n"
+"Language-Team: Dutch (https://www.transifex.com/divio/teams/58664/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: __init__.py:33
 msgid "No forms registered"
-msgstr "Keine Formulare registriert"
+msgstr ""
 
 #: actions.py:21
 msgid "No actions registered"
-msgstr "Keine Aktionen registriert"
+msgstr ""
 
 #: actions.py:54
 msgid "Save form submission"
-msgstr "Formulareinsendungen speichern"
+msgstr ""
 
 #: actions.py:95
 msgid "Send email to administrators"
-msgstr "Email an Administratoren senden"
+msgstr ""
 
 #: actions.py:99
 #, python-format
 msgid "%(form_name)s form submission"
-msgstr "%(form_name)s: Einsendung erhalten"
+msgstr ""
 
 #: apps.py:12
 msgid "django CMS form builder"
-msgstr "django CMS Form Builder"
+msgstr ""
 
 #: cms_plugins/ajax_plugins.py:239 entry_model.py:32 forms.py:91 models.py:23
 #: models.py:26
 msgid "Form"
-msgstr "Formular"
+msgstr ""
 
 #: cms_plugins/ajax_plugins.py:264
 msgid "Actions"
-msgstr "Aktionen"
+msgstr ""
 
 #: cms_plugins/ajax_plugins.py:289
 msgid "reCaptcha"
-msgstr "ReCaptcha"
+msgstr ""
 
 #: cms_plugins/ajax_plugins.py:295
 #, python-brace-format
@@ -68,65 +64,59 @@ msgid ""
 "<code>RECAPTCHA_PUBLIC_KEY</code> and <code>RECAPTCHA_PRIVATE_KEY</code>. "
 "Without these keys captcha protection will not work.</blockquote>"
 msgstr ""
-"<blockquote style=\"color: var(--error-fg);\">Bitte erhalte einen "
-"öffentlichen und einen geheimen Schlüssel bei <a href=\"{key_link}\" "
-"target=\"_blank\">Google</a> und stelle sicher, dass sie über die Django-"
-"Einstellungen <code>RECAPTCHA_PUBLIC_KEY</code> und "
-"<code>RECAPTCHA_PRIVATE_KEY</code> verfügbar sind. Ohne Schlüssel kann keine"
-" Captcha-Überprüfung durchgeführt werden.</blockquote>"
 
 #: cms_plugins/form_plugins.py:17 cms_plugins/form_plugins.py:209
 #: cms_plugins/form_plugins.py:240
 msgid "Forms"
-msgstr "Formulare"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:20
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:69
 msgid "Text"
-msgstr "Text"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:77
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:84
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:91
 msgid "Decimal"
-msgstr "Dezimalzahl"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:99
 msgid "Integer"
-msgstr "Ganze Zahl"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:107
 msgid "Textarea"
-msgstr "Textfeld"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:118
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:125
 msgid "Date and time"
-msgstr "Datum und Uhrzeit"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:132
 msgid "Time"
-msgstr "Uhrzeit"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:139 models.py:384
 msgid "Select"
-msgstr "Auswahl"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:158 fields.py:131
 msgid "Choices"
-msgstr "Optionen"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:162
 msgid ""
@@ -136,154 +126,143 @@ msgid ""
 "to the user. The order of choices can be adjusted in the structure tree "
 "<b>after saving</b> the edits."
 msgstr ""
-"Dieses Feld dient der schnellen Erstellung von gültigen Optionen. Optionen "
-"können hinzugefügt (<kbd>+</kbd>) und gelöscht (<kbd>&times;</kbd>) werden. "
-"Links steht der Wert, der in der Datenbank gespeichert wird, rechts der "
-"Text, der dem Nutzer angezeigt wird. Die Reihenfolge der Optionen kann im "
-"Struktur-Baum geändert werden, <b>nachdem die Eingaben gespeichert sind.</b>"
 
 #: cms_plugins/form_plugins.py:208 models.py:431
 msgid "Choice"
-msgstr "Option"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:219
 msgid "Boolean"
-msgstr "Ja/Nein-Feld"
+msgstr ""
 
 #: cms_plugins/form_plugins.py:239 models.py:463
 msgid "Submit button"
-msgstr "Absende-Button"
+msgstr ""
 
 #: constants.py:21
 msgid "Single choice"
-msgstr "Einfach-Auswahl"
+msgstr ""
 
 #: constants.py:23
 msgid "Drop down"
-msgstr "Drop-Down-Menü"
+msgstr ""
 
 #: constants.py:24
 msgid "Radio buttons"
-msgstr "Radio-Buttons"
+msgstr ""
 
 #: constants.py:28
 msgid "Multiple choice"
-msgstr "Mehrfach-Auswahl"
+msgstr ""
 
 #: constants.py:30
 msgid "Checkboxes"
-msgstr "Auswahlkästchen"
+msgstr ""
 
 #: constants.py:31
 msgid "List"
-msgstr "Liste"
+msgstr ""
 
 #: entry_model.py:28
 msgid "Form entry"
-msgstr "Formular-Eintrag"
+msgstr ""
 
 #: entry_model.py:29
 msgid "Form entries"
-msgstr "Formular-Einträge"
+msgstr ""
 
 #: entry_model.py:37
 msgid "User"
-msgstr "Nutzer"
+msgstr ""
 
 #: entry_model.py:108
 msgid "User-entered data"
-msgstr "Nutzer-Eingaben"
+msgstr ""
 
 #: fields.py:94
 msgid "Please select at least one device size"
-msgstr "Bitte mindestens eine Bildschirmgröße auswählen."
+msgstr ""
 
 #: fields.py:102 fields.py:110
 msgid "Attributes"
-msgstr "Attribute"
+msgstr ""
 
 #: fields.py:142
 msgid ""
 "Please enter at least one choice. Use the <code>+</code> symbol to add a "
 "choice."
 msgstr ""
-"Bitte geben Sie mindestens eine Option an. <code>+</code> fügt eine Option "
-"hinzu."
 
 #: fields.py:161 fields.py:175
 msgid "Tag type"
-msgstr "HTML-Tag"
+msgstr ""
 
 #: fields.py:169
 msgid "Select the HTML tag to be used."
-msgstr "HTML-Tag auswählen, der genutzt werden soll."
+msgstr ""
 
 #: forms.py:47
 msgid "Please login before submitting this form."
-msgstr "Bitte zuerst anmelden. Dann kann das Formular abgeschickt werden."
+msgstr ""
 
 #: forms.py:59
 msgid "Action not available any more"
-msgstr "Aktion nicht mehr verfügbar."
+msgstr ""
 
 #: forms.py:61
 msgid "No action registered"
-msgstr "Keine Aktionen registriert"
+msgstr ""
 
 #: forms.py:96 models.py:32
 msgid "Form name"
-msgstr "Formularname"
+msgstr ""
 
 #: forms.py:104 models.py:41
 msgid "Login required to submit form"
-msgstr "Anmeldung notwendig, um Formular abzusenden"
+msgstr ""
 
 #: forms.py:108 models.py:45
 msgid ""
 "To avoid issues with user experience use this type of form only on pages, "
 "which require login."
 msgstr ""
-"Um Probleme mit der Nutzererfahrung zu vermeiden, bitte nur auf Seiten "
-"nutzen, die angemeldete Nutzer voraussetzen."
 
 #: forms.py:114 models.py:51
 msgid "User can reopen form"
-msgstr "Nutzer kann Formular wider öffnen"
+msgstr ""
 
 #: forms.py:117 models.py:53
 msgid "Requires \"Login required\" to be checked to work."
-msgstr "Benötigt \"Anmeldung notwendig, um Formular abzusenden\"."
+msgstr ""
 
 #: forms.py:121 models.py:61
 msgid "Margin between fields"
-msgstr "Abstand zwischen Feldern"
+msgstr ""
 
 #: forms.py:127 models.py:66
 msgid "Actions to be taken after form submission"
-msgstr "Aktionen nach erfolgreicher Formular-Abgabe"
+msgstr ""
 
 #: forms.py:135 models.py:75
 msgid "reCaptcha widget"
-msgstr "ReCaptche-Sicherung"
+msgstr ""
 
 #: forms.py:141 models.py:82
 #, python-brace-format
 msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
-msgstr "Mehr in der <a href=\"{link}\" target=\"_blank\">Dokumentation</a>."
+msgstr ""
 
 #: forms.py:146 models.py:87
 msgid "Minimum score requirement"
-msgstr "Minimaler Bewertung durch ReCaptcha"
+msgstr ""
 
 #: forms.py:152 models.py:93
 msgid "Only for reCaptcha v3: Minimum score required to accept challenge."
 msgstr ""
-"Nur für ReCaptcha V3: Minimale Bewertung, damit das Formular angenommen "
-"wird."
 
 #: forms.py:156 models.py:97
 msgid "Recaptcha configuration parameters"
-msgstr "ReCaptcha-Konfiguration"
+msgstr ""
 
 #: forms.py:159 models.py:100
 #, python-brace-format
@@ -295,285 +274,256 @@ msgid ""
 "target=\"_blank\">parameters</a>. Add these api parameters as attributes, "
 "e.g. <code>hl</code> to set the language."
 msgstr ""
-"Das reCAPTCHA-Feld unterstüzt mehrere <a href=\"{attr_link}\" "
-"target=\"_blank\">Datenattribute</a>, die das Verhalten des Feldes anpassen,"
-" wie z.B. <code>data-theme</code>, <code>data-size</code>. Die reCAPTCHA API"
-" unterstützt mehrere <a href=\"{api_link}\" target=\"_blank\">Parameter</a>."
-" Dies API-Parameter als Attribute hinzufügen, z.B. <code>hl</code> um die "
-"Sprache einzustellen."
 
 #: forms.py:188
 msgid "Please provide a form name to be able to evaluate form submissions."
 msgstr ""
-"Bitte einen eindeutigen Formularnamen angeben, um die Formulare auswerten zu"
-" können."
 
 #: forms.py:203
 msgid "Please select \"Save form submission\" to allow users to reopen forms."
 msgstr ""
-"Bitte \"Formulareinsendungen speichern\" wählen, damit Nutzer Formulare "
-"wieder öffnen können."
 
 #: forms.py:206
 msgid ""
 "Please select the action \"Save form submission\" to allow users to reopen "
 "forms."
 msgstr ""
-"Bitte die Aktion \"Formulareinsendungen speichern\" wählen, damit Nutzer "
-"Formulare wieder öffnen können."
 
 #: forms.py:214
 msgid ""
 "No form action to save form contents available. Users will not be able to "
 "reopen a form."
 msgstr ""
-"Keine Aktion zur Speicherung der Formularinhalte verfügbar. Nutzer werden "
-"abgesendete Formular nicht wieder öffnen können."
 
 #: forms.py:223
 msgid ""
 "At least one action needs to be selected for the form to have an effect."
 msgstr ""
-"Mindestens eine Aktion muss ausgewählt werden, damit das Absenden eines "
-"Formulars auch einen Effekt haben kann."
 
 #: forms.py:232
 #, python-format
 msgid "Users can only reopen forms if they are logged in. %(remedy)s"
 msgstr ""
-"Nutzer können Formulare nur dann wieder öffnen, wenn sie angemeldet sind. "
-"%(remedy)s"
 
 #: forms.py:236
 msgid "Either enable this."
-msgstr "Entweder diese anwählen."
+msgstr ""
 
 #: forms.py:237
 msgid "Or disable this."
-msgstr "Oder dieses nicht anwählen."
+msgstr ""
 
 #: forms.py:261
 msgid "This name is reserved. Please chose a different one."
-msgstr "Dieser Name ist reserviert. Bitte einen anderen auswählen."
+msgstr ""
 
 #: forms.py:282
 msgid "Field name"
-msgstr "Feldname"
+msgstr ""
 
 #: forms.py:284
 msgid ""
 "Internal field name consisting of letters, numbers, underscores or hyphens"
 msgstr ""
-"Interner Feldname bestehend aus Buchstaben, Ziffern, Unterstrich oder "
-"Bindestrich"
 
 #: forms.py:290
 msgid "Label"
-msgstr "Beschriftung"
+msgstr ""
 
 #: forms.py:292
 msgid "Field label shown to the user describing the entity to be entered"
 msgstr ""
-"Feldbeschreibung für den Nutzer, die beschreibt, was eingegeben werden soll."
 
 #: forms.py:297
 msgid "Placeholder"
-msgstr "Platzhalter"
+msgstr ""
 
 #: forms.py:298
 msgid "Example input shown muted in an empty field"
-msgstr "Beispieleingabe, die grau in einem leeren Feld angezeigt wird."
+msgstr ""
 
 #: forms.py:302
 msgid "Required"
-msgstr "Notwendig"
+msgstr ""
 
 #: forms.py:306
 msgid "If selected form will not accept submissions with with empty data"
 msgstr ""
-"Wenn ausgewählt kann das Formular nicht mit leeren Daten abgeschickt werden."
 
 #: forms.py:322 forms.py:327 forms.py:417
 msgid "Minimum text length"
-msgstr "Minimale Textlänge"
+msgstr ""
 
 #: forms.py:359 forms.py:387
 msgid "Minimum value"
-msgstr "Minimaler Wert"
+msgstr ""
 
 #: forms.py:364 forms.py:392
 msgid "Maximum value"
-msgstr "Maximaler Wert"
+msgstr ""
 
 #: forms.py:367
 msgid "Decimal places"
-msgstr "Anzahl Dezimalstellen"
+msgstr ""
 
 #: forms.py:410
 msgid "Rows"
-msgstr "Zeilen"
+msgstr ""
 
 #: forms.py:414
 msgid "Defines the vertical size of the text area in number of rows."
-msgstr "Legt die vertikale Größe des Textfeldes in Anzahl Zeilen fest."
+msgstr ""
 
 #: forms.py:422
 msgid "Maximum text length"
-msgstr "Maximale Textlänge"
+msgstr ""
 
 #: forms.py:435 forms.py:447 forms.py:457
 msgid "Not visible on most browsers."
-msgstr "Auf den meisten Browsern nicht sichtbar"
+msgstr ""
 
 #: forms.py:476
 msgid "Selection type"
-msgstr "Art der Auswahl"
+msgstr ""
 
 #: forms.py:496
 msgid ""
 "For a required multiple choice fild select the <b>list</b> selection type."
 msgstr ""
-"Bitte <b>Listenauswahl</b> für ein benötigtes Mehrfachauswahl-Feld wählen."
 
 #: forms.py:500
 msgid "Checkbox multiple choice field <b>must not be required</b>."
 msgstr ""
-"Eine Mehrfachauswahl mit Auswahlhaken <b>darf nicht als notwendig</b> "
-"markiert werden."
 
 #: forms.py:518 templates/djangocms_form_builder/actions/mail.html:8
 msgid "Value"
-msgstr "Wert"
+msgstr ""
 
 #: forms.py:520
 msgid "Stored in database if the choice is selected."
-msgstr "Wird in der Datenbank gespeichert, wenn die Auswahl getroffen wird."
+msgstr ""
 
 #: forms.py:523
 msgid "Display text"
-msgstr "Anzeigter Text"
+msgstr ""
 
 #: forms.py:525
 msgid "Representation of choice displayed to the user."
-msgstr "Beschriftung der Option für den Nutzer"
+msgstr ""
 
 #: forms.py:541
 msgid "Layout"
-msgstr "Layout"
+msgstr ""
 
 #: forms.py:545
 msgid "Checkbox"
-msgstr "Auswahlkästchen"
+msgstr ""
 
 #: forms.py:545
 msgid "Switch"
-msgstr "Schalter"
+msgstr ""
 
 #: forms.py:553
 msgid ""
 "If checked, the form can only be submitted if the checkbox is checked or the"
 " switch set to on."
 msgstr ""
-"Wenn aktiviert kann das Formular nur dann abgeschickt werden, wenn die "
-"Auswahlbox ausgewählt oder der Schalter auf \"an\" gestellt ist."
 
 #: forms.py:570
 msgid "Button label"
-msgstr "Bezeichnung der Schaltfläche"
+msgstr ""
 
 #: forms.py:571 templates/djangocms_form_builder/bootstrap5/form.html:10
 #: templates/djangocms_form_builder/bootstrap5/widgets/submit.html:1
 msgid "Submit"
-msgstr "Absenden"
+msgstr ""
 
 #: models.py:57
 msgid "Floating labels"
-msgstr "Fließende Feldbezeichnungen"
+msgstr ""
 
 #: models.py:127
 msgid "Form field item"
-msgstr "Formular-Feld"
+msgstr ""
 
 #: models.py:199
 msgid "Character field"
-msgstr "Zeichenkette"
+msgstr ""
 
 #: models.py:214
 msgid "Email field"
-msgstr "Email"
+msgstr ""
 
 #: models.py:229
 msgid "URL field"
-msgstr "URL-Feld"
+msgstr ""
 
 #: models.py:244
 msgid "Decimal field"
-msgstr "Dezimalfeld"
+msgstr ""
 
 #: models.py:288
 msgid "Integer field"
-msgstr "Ganzzahliges Feld"
+msgstr ""
 
 #: models.py:303
 msgid "Text field"
-msgstr "Textfeld"
+msgstr ""
 
 #: models.py:322 models.py:340 models.py:366
 msgid "Date field"
-msgstr "Datumsfeld"
+msgstr ""
 
 #: models.py:387
 msgid "No selection"
-msgstr "Keine Auswahl"
+msgstr ""
 
 #: models.py:444
 msgid "Boolean field"
-msgstr "Ja/Nein-Feld"
+msgstr ""
 
 #: recaptcha.py:38
 msgid "v2 checkbox"
-msgstr "v2 mit Auswahlkästchen"
+msgstr ""
 
 #: recaptcha.py:39
 msgid "v2 invisible"
-msgstr "v2 unsichtbar"
+msgstr ""
 
 #: templates/djangocms_form_builder/actions/mail.html:2
 msgid "Form submission"
-msgstr "Formular abschicken"
+msgstr ""
 
 #: templates/djangocms_form_builder/actions/mail.html:3
 msgid "by"
-msgstr "von"
+msgstr ""
 
 #: templates/djangocms_form_builder/actions/mail.html:3
 msgid "by anonymous"
-msgstr "anonym"
+msgstr ""
 
 #: templates/djangocms_form_builder/actions/mail.html:7
 msgid "Field"
-msgstr "Feld"
+msgstr ""
 
 #: templates/djangocms_form_builder/actions/mail.html:19
 msgid "time"
-msgstr "time"
+msgstr ""
 
 #: templates/djangocms_form_builder/actions/mail.html:23
 msgid "user agent"
-msgstr "user agent"
+msgstr ""
 
 #: templates/djangocms_form_builder/actions/mail.html:27
 msgid "referer"
-msgstr "referer"
+msgstr ""
 
 #: templates/djangocms_form_builder/ajax_form.html:118
 msgid ""
 "Network connection or server error. Please try again later. We apologize for"
 " the inconvenience."
 msgstr ""
-"Netzwerk-Verbindungs-Problem oder Server-Problem. Bitte versuchen Sie es "
-"später nochenmal. Wir entschuldigen uns für die Unannehmlichkeit."
 
 #: views.py:25
 msgid "Only unique slugs accepted for form views"
-msgstr "Nur eindeutige Slugs für Formular-Anschten akzeptiert."
+msgstr ""
