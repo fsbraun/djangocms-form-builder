@@ -3,5 +3,4 @@
 Django>=4.1,<4.2
 django-cms==4.1.0rc1
 djangocms-text-ckeditor
--e git+https://github.com/Aiky30/djangocms-alias.git@feature/django-32-compat#egg=djangocms-alias
 https://github.com/django-cms/djangocms-versioning/tarball/master#egg=djangocms-versioning
