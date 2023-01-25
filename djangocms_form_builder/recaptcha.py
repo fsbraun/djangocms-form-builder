@@ -77,8 +77,6 @@ def get_recaptcha_field(instance):
     )
     return field
 
-installed = True
-
 keys_available = installed and (
     hasattr(settings, "RECAPTCHA_PUBLIC_KEY")
     and hasattr(settings, "RECAPTCHA_PRIVATE_KEY")
