@@ -17,8 +17,7 @@ FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FORMS_OPTIONS", {})
 framework = getattr(django_settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")
 
-
-SPACER_SIZE_CHOICES = (("mb-3", "Default"),)
+DEFAULT_SPACER_SIZE_CHOICES = (("mb-3", "Default"),)
 TAG_CHOICES = (("div", "div"),)
 FORM_TEMPLATE = getattr(
     django_settings,
@@ -28,6 +27,14 @@ FORM_TEMPLATE = getattr(
 
 theme_render_path = f"{theme}.frameworks.{framework}"
 theme_forms_path = f"{theme}.forms"
+
+if not getattr(django_settings, 'DJANGO_FORM_BUILDER_SPACER_CHOICES', False):
+    if not getattr(django_settings, 'DJANGOCMS_FRONTEND_SPACER_SIZES', False):
+        SPACER_SIZE_CHOICES = DEFAULT_SPACER_SIZE_CHOICES
+    else:
+        SPACER_SIZE_CHOICES = django_settings.DJANGOCMS_FRONTEND_SPACER_SIZES
+else:
+    SPACER_SIZE_CHOICES = django_settings.DJANGO_FORM_BUILDER_SPACER_CHOICES
 
 
 def render_factory(cls, theme_module, render_module):
