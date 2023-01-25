@@ -1,4 +1,3 @@
-from django import forms
 from django.apps import apps
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -13,10 +12,7 @@ if apps.is_installed("captcha"):
     """Soft dependency on django-captcha for reCaptchaField"""
 
     from captcha.fields import ReCaptchaField  # NOQA
-    from captcha.widgets import (  # NOQA
-        ReCaptchaV2Checkbox,
-        ReCaptchaV2Invisible,
-    )
+    from captcha.widgets import ReCaptchaV2Checkbox, ReCaptchaV2Invisible  # NOQA
 
     CAPTCHA_WIDGETS['v2-checkbox'] = ReCaptchaV2Checkbox
     CAPTCHA_WIDGETS['v2-invisible'] = ReCaptchaV2Invisible
@@ -33,9 +29,7 @@ if apps.is_installed("hcaptcha"):
     """Soft dependency on django-hcaptcha for hcaptcha"""
 
     from hcaptcha.fields import hCaptchaField  # NOQA
-    from hcaptcha.widgets import (  # NOQA
-        hCaptchaWidget
-    )
+    from hcaptcha.widgets import hCaptchaWidget  # NOQA
 
     CAPTCHA_FIELDS['hcaptcha'] = hCaptchaField
     CAPTCHA_WIDGETS['hcaptcha'] = hCaptchaWidget
@@ -68,7 +62,7 @@ def get_recaptcha_field(instance):
     if config.get("captcha_widget", "") == "v3":
         widget_params["attrs"]["required_score"] = coerce_decimal(
             config.get("captcha_requirement", 0.5)
-        ) # installing recaptcha 3 ?
+        )  # installing recaptcha 3 ?
     if not widget_params["api_params"]:
         del widget_params["api_params"]
     field = CAPTCHA_FIELDS[instance.captcha_widget](
@@ -76,6 +70,7 @@ def get_recaptcha_field(instance):
         label=""
     )
     return field
+
 
 keys_available = installed and (
     hasattr(settings, "RECAPTCHA_PUBLIC_KEY")
