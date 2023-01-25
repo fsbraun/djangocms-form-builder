@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Stefan van den Eertwegh <stefan@corebyte.nl>, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-24 14:41+0100\n"
 "PO-Revision-Date: 2023-01-24 13:42+0000\n"
+"Last-Translator: Stefan van den Eertwegh <stefan@corebyte.nl>, 2023\n"
 "Language-Team: Dutch (https://www.transifex.com/divio/teams/58664/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,41 +23,41 @@ msgstr ""
 
 #: __init__.py:33
 msgid "No forms registered"
-msgstr ""
+msgstr "Geen formulieren geregistreerd"
 
 #: actions.py:21
 msgid "No actions registered"
-msgstr ""
+msgstr "Geen acties geregistreerd"
 
 #: actions.py:54
 msgid "Save form submission"
-msgstr ""
+msgstr "Form inzending opslaan"
 
 #: actions.py:95
 msgid "Send email to administrators"
-msgstr ""
+msgstr "Verzend e-mail naar de administrators"
 
 #: actions.py:99
 #, python-format
 msgid "%(form_name)s form submission"
-msgstr ""
+msgstr "%(form_name)s formulier inzending"
 
 #: apps.py:12
 msgid "django CMS form builder"
-msgstr ""
+msgstr "django CMS form builder"
 
 #: cms_plugins/ajax_plugins.py:239 entry_model.py:32 forms.py:91 models.py:23
 #: models.py:26
 msgid "Form"
-msgstr ""
+msgstr "Formulier"
 
 #: cms_plugins/ajax_plugins.py:264
 msgid "Actions"
-msgstr ""
+msgstr "Acties"
 
 #: cms_plugins/ajax_plugins.py:289
 msgid "reCaptcha"
-msgstr ""
+msgstr "reCaptcha"
 
 #: cms_plugins/ajax_plugins.py:295
 #, python-brace-format
@@ -68,55 +72,55 @@ msgstr ""
 #: cms_plugins/form_plugins.py:17 cms_plugins/form_plugins.py:209
 #: cms_plugins/form_plugins.py:240
 msgid "Forms"
-msgstr ""
+msgstr "Formulieren"
 
 #: cms_plugins/form_plugins.py:20
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: cms_plugins/form_plugins.py:69
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: cms_plugins/form_plugins.py:77
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: cms_plugins/form_plugins.py:84
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: cms_plugins/form_plugins.py:91
 msgid "Decimal"
-msgstr ""
+msgstr "Decimaal"
 
 #: cms_plugins/form_plugins.py:99
 msgid "Integer"
-msgstr ""
+msgstr "Nummer"
 
 #: cms_plugins/form_plugins.py:107
 msgid "Textarea"
-msgstr ""
+msgstr "Grote tekst"
 
 #: cms_plugins/form_plugins.py:118
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: cms_plugins/form_plugins.py:125
 msgid "Date and time"
-msgstr ""
+msgstr "Datum en tijd"
 
 #: cms_plugins/form_plugins.py:132
 msgid "Time"
-msgstr ""
+msgstr "Tijd"
 
 #: cms_plugins/form_plugins.py:139 models.py:384
 msgid "Select"
-msgstr ""
+msgstr "Selecteer"
 
 #: cms_plugins/form_plugins.py:158 fields.py:131
 msgid "Choices"
-msgstr ""
+msgstr "Opties"
 
 #: cms_plugins/form_plugins.py:162
 msgid ""
@@ -129,140 +133,145 @@ msgstr ""
 
 #: cms_plugins/form_plugins.py:208 models.py:431
 msgid "Choice"
-msgstr ""
+msgstr "Kies"
 
 #: cms_plugins/form_plugins.py:219
 msgid "Boolean"
-msgstr ""
+msgstr "Ja / Nee"
 
 #: cms_plugins/form_plugins.py:239 models.py:463
 msgid "Submit button"
-msgstr ""
+msgstr "Plaatsen knop"
 
 #: constants.py:21
 msgid "Single choice"
-msgstr ""
+msgstr "Enkele keus"
 
 #: constants.py:23
 msgid "Drop down"
-msgstr ""
+msgstr "Drop down"
 
 #: constants.py:24
 msgid "Radio buttons"
-msgstr ""
+msgstr "Radio button"
 
 #: constants.py:28
 msgid "Multiple choice"
-msgstr ""
+msgstr "Meerdere opties"
 
 #: constants.py:30
 msgid "Checkboxes"
-msgstr ""
+msgstr "Checkboxes"
 
 #: constants.py:31
 msgid "List"
-msgstr ""
+msgstr "Lijst"
 
 #: entry_model.py:28
 msgid "Form entry"
-msgstr ""
+msgstr "Formulier toegang"
 
 #: entry_model.py:29
 msgid "Form entries"
-msgstr ""
+msgstr "Formulier toegangen"
 
 #: entry_model.py:37
 msgid "User"
-msgstr ""
+msgstr "Gebruiker"
 
 #: entry_model.py:108
 msgid "User-entered data"
-msgstr ""
+msgstr "Gebruiker-getypte data"
 
 #: fields.py:94
 msgid "Please select at least one device size"
-msgstr ""
+msgstr "Selecteer aub. op z'n minst een apparaat grootte"
 
 #: fields.py:102 fields.py:110
 msgid "Attributes"
-msgstr ""
+msgstr "Attributen"
 
 #: fields.py:142
 msgid ""
 "Please enter at least one choice. Use the <code>+</code> symbol to add a "
 "choice."
 msgstr ""
+"Maak op z'n minst een keuze. Gebruik <code>+</code> symbool voor toevoegen "
+"van een optie."
 
 #: fields.py:161 fields.py:175
 msgid "Tag type"
-msgstr ""
+msgstr "Tag type"
 
 #: fields.py:169
 msgid "Select the HTML tag to be used."
-msgstr ""
+msgstr "Selecteer de HTML tag in gebruik."
 
 #: forms.py:47
 msgid "Please login before submitting this form."
-msgstr ""
+msgstr "Login aub. voor plaatsing dit formulier."
 
 #: forms.py:59
 msgid "Action not available any more"
-msgstr ""
+msgstr "Actie is niet meer beschikbaar"
 
 #: forms.py:61
 msgid "No action registered"
-msgstr ""
+msgstr "Geen actie geregistreerd"
 
 #: forms.py:96 models.py:32
 msgid "Form name"
-msgstr ""
+msgstr "Formulier naam"
 
 #: forms.py:104 models.py:41
 msgid "Login required to submit form"
-msgstr ""
+msgstr "Login is vereist voor plaatsen van het formulier"
 
 #: forms.py:108 models.py:45
 msgid ""
 "To avoid issues with user experience use this type of form only on pages, "
 "which require login."
 msgstr ""
+"Om issues te voorkomen met gebruikers vaardigheden gebruik deze type of "
+"formulier alleen op pagina's welke login verwachtte"
 
 #: forms.py:114 models.py:51
 msgid "User can reopen form"
-msgstr ""
+msgstr "Gebruiker kan formulier heropenen"
 
 #: forms.py:117 models.py:53
 msgid "Requires \"Login required\" to be checked to work."
-msgstr ""
+msgstr "Vereist \"Login required\" wordt gecheckt te werken."
 
 #: forms.py:121 models.py:61
 msgid "Margin between fields"
-msgstr ""
+msgstr "Margin tussen de velden"
 
 #: forms.py:127 models.py:66
 msgid "Actions to be taken after form submission"
-msgstr ""
+msgstr "Actie in gebruik na het plaatsen van het formulier"
 
 #: forms.py:135 models.py:75
 msgid "reCaptcha widget"
-msgstr ""
+msgstr "reCaptcha widget"
 
 #: forms.py:141 models.py:82
 #, python-brace-format
 msgid "Read more in the <a href=\"{link}\" target=\"_blank\">documentation</a>."
-msgstr ""
+msgstr "Lees meer in de <a href=\"{link}\" target=\"_blank\"> documentatie </a>."
 
 #: forms.py:146 models.py:87
 msgid "Minimum score requirement"
-msgstr ""
+msgstr "Minimum vereiste score"
 
 #: forms.py:152 models.py:93
 msgid "Only for reCaptcha v3: Minimum score required to accept challenge."
 msgstr ""
+"Alleen voor reCaptcha v3: Minimum vereiste score voor werking captcha."
 
 #: forms.py:156 models.py:97
 msgid "Recaptcha configuration parameters"
-msgstr ""
+msgstr "Recaptcha configuratie parameters"
 
 #: forms.py:159 models.py:100
 #, python-brace-format
@@ -278,57 +287,69 @@ msgstr ""
 #: forms.py:188
 msgid "Please provide a form name to be able to evaluate form submissions."
 msgstr ""
+"Geef aub. de formulier naam om te evalueren van formulier inzendingen."
 
 #: forms.py:203
 msgid "Please select \"Save form submission\" to allow users to reopen forms."
 msgstr ""
+"Selecteer aub. \"Save form submission\" om gebruikers toe te staan "
+"formulieren te heropenen."
 
 #: forms.py:206
 msgid ""
 "Please select the action \"Save form submission\" to allow users to reopen "
 "forms."
 msgstr ""
+"Selecteer aub. \"Save form submission\" om gebruikers toe te staan "
+"formulieren te heropenen."
 
 #: forms.py:214
 msgid ""
 "No form action to save form contents available. Users will not be able to "
 "reopen a form."
 msgstr ""
+"Geen formulier actie om content op te slaan is beschikbaar. Gebruikers "
+"zullen niet kundig zijn op dit formulier te openen."
 
 #: forms.py:223
 msgid ""
 "At least one action needs to be selected for the form to have an effect."
 msgstr ""
+"Op zijn minst een actie moet geselecteerd worden voor dit formulier om "
+"effect te hebben."
 
 #: forms.py:232
 #, python-format
 msgid "Users can only reopen forms if they are logged in. %(remedy)s"
 msgstr ""
+"Gebruikers kunnen alleen heropenen van formulieren als ze ingelogd zijn. "
+"%(remedy)s"
 
 #: forms.py:236
 msgid "Either enable this."
-msgstr ""
+msgstr "Schakel dit in."
 
 #: forms.py:237
 msgid "Or disable this."
-msgstr ""
+msgstr "Of schakel dit uit."
 
 #: forms.py:261
 msgid "This name is reserved. Please chose a different one."
-msgstr ""
+msgstr "Deze naam is gereserveerd. Kies aub. een andere."
 
 #: forms.py:282
 msgid "Field name"
-msgstr ""
+msgstr "Veld naam"
 
 #: forms.py:284
 msgid ""
 "Internal field name consisting of letters, numbers, underscores or hyphens"
 msgstr ""
+"Interne veld naam bevat minimaal letters, nummers, underscores of hyphens"
 
 #: forms.py:290
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: forms.py:292
 msgid "Field label shown to the user describing the entity to be entered"
@@ -336,76 +357,79 @@ msgstr ""
 
 #: forms.py:297
 msgid "Placeholder"
-msgstr ""
+msgstr "Placeholder"
 
 #: forms.py:298
 msgid "Example input shown muted in an empty field"
-msgstr ""
+msgstr "Voorbeeld input geeft een leeg veld weer"
 
 #: forms.py:302
 msgid "Required"
-msgstr ""
+msgstr "Verplicht"
 
 #: forms.py:306
 msgid "If selected form will not accept submissions with with empty data"
 msgstr ""
+"als geselecteerd formulier niet de inzending wil accepteren met lege data"
 
 #: forms.py:322 forms.py:327 forms.py:417
 msgid "Minimum text length"
-msgstr ""
+msgstr "Minimum tekst lengte"
 
 #: forms.py:359 forms.py:387
 msgid "Minimum value"
-msgstr ""
+msgstr "Minimum value"
 
 #: forms.py:364 forms.py:392
 msgid "Maximum value"
-msgstr ""
+msgstr "Maximum value"
 
 #: forms.py:367
 msgid "Decimal places"
-msgstr ""
+msgstr "Decimale plaatsen"
 
 #: forms.py:410
 msgid "Rows"
-msgstr ""
+msgstr "Rijen"
 
 #: forms.py:414
 msgid "Defines the vertical size of the text area in number of rows."
-msgstr ""
+msgstr "Definieer de verticale grootte of de lange tekst in nummer van rijen."
 
 #: forms.py:422
 msgid "Maximum text length"
-msgstr ""
+msgstr "Maximum tekst lengte"
 
 #: forms.py:435 forms.py:447 forms.py:457
 msgid "Not visible on most browsers."
-msgstr ""
+msgstr "Niet zichtbaar bij de meeste browsers."
 
 #: forms.py:476
 msgid "Selection type"
-msgstr ""
+msgstr "Selectie type"
 
 #: forms.py:496
 msgid ""
 "For a required multiple choice fild select the <b>list</b> selection type."
 msgstr ""
+"Voor een verplicht meerder keuze optie ingevuld, selecteer de <b>lijst</b> "
+"selectie type."
 
 #: forms.py:500
 msgid "Checkbox multiple choice field <b>must not be required</b>."
-msgstr ""
+msgstr "Checkbox meerdere keuze opties <b> moet niet verplicht zijn </b>."
 
 #: forms.py:518 templates/djangocms_form_builder/actions/mail.html:8
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 #: forms.py:520
 msgid "Stored in database if the choice is selected."
-msgstr ""
+msgstr "Opslagen in database als de optie is geselecteerd."
 
 #: forms.py:523
 msgid "Display text"
-msgstr ""
+msgstr "Tekst weergeven"
 
 #: forms.py:525
 msgid "Representation of choice displayed to the user."
@@ -413,15 +437,15 @@ msgstr ""
 
 #: forms.py:541
 msgid "Layout"
-msgstr ""
+msgstr "Layout"
 
 #: forms.py:545
 msgid "Checkbox"
-msgstr ""
+msgstr "Checkbox"
 
 #: forms.py:545
 msgid "Switch"
-msgstr ""
+msgstr "Wissel"
 
 #: forms.py:553
 msgid ""
@@ -431,92 +455,92 @@ msgstr ""
 
 #: forms.py:570
 msgid "Button label"
-msgstr ""
+msgstr "Knop label"
 
 #: forms.py:571 templates/djangocms_form_builder/bootstrap5/form.html:10
 #: templates/djangocms_form_builder/bootstrap5/widgets/submit.html:1
 msgid "Submit"
-msgstr ""
+msgstr "Plaatsen"
 
 #: models.py:57
 msgid "Floating labels"
-msgstr ""
+msgstr "Zwevende labels"
 
 #: models.py:127
 msgid "Form field item"
-msgstr ""
+msgstr "Formulier veld item"
 
 #: models.py:199
 msgid "Character field"
-msgstr ""
+msgstr "Karakter's veld"
 
 #: models.py:214
 msgid "Email field"
-msgstr ""
+msgstr "E-mail veld"
 
 #: models.py:229
 msgid "URL field"
-msgstr ""
+msgstr "URL veld"
 
 #: models.py:244
 msgid "Decimal field"
-msgstr ""
+msgstr "Decimaal veld"
 
 #: models.py:288
 msgid "Integer field"
-msgstr ""
+msgstr "Nummer veld"
 
 #: models.py:303
 msgid "Text field"
-msgstr ""
+msgstr "Tekst veld"
 
 #: models.py:322 models.py:340 models.py:366
 msgid "Date field"
-msgstr ""
+msgstr "Datum veld"
 
 #: models.py:387
 msgid "No selection"
-msgstr ""
+msgstr "Geen selectie"
 
 #: models.py:444
 msgid "Boolean field"
-msgstr ""
+msgstr "Ja / Nee veld"
 
 #: recaptcha.py:38
 msgid "v2 checkbox"
-msgstr ""
+msgstr "v2 checkbox"
 
 #: recaptcha.py:39
 msgid "v2 invisible"
-msgstr ""
+msgstr "v2 onzichtbaar"
 
 #: templates/djangocms_form_builder/actions/mail.html:2
 msgid "Form submission"
-msgstr ""
+msgstr "Formulier inzending"
 
 #: templates/djangocms_form_builder/actions/mail.html:3
 msgid "by"
-msgstr ""
+msgstr "door"
 
 #: templates/djangocms_form_builder/actions/mail.html:3
 msgid "by anonymous"
-msgstr ""
+msgstr "door anonymous"
 
 #: templates/djangocms_form_builder/actions/mail.html:7
 msgid "Field"
-msgstr ""
+msgstr "Veld"
 
 #: templates/djangocms_form_builder/actions/mail.html:19
 msgid "time"
-msgstr ""
+msgstr "tijd"
 
 #: templates/djangocms_form_builder/actions/mail.html:23
 msgid "user agent"
-msgstr ""
+msgstr "user agent"
 
 #: templates/djangocms_form_builder/actions/mail.html:27
 msgid "referer"
-msgstr ""
+msgstr "verwijzer"
 
 #: templates/djangocms_form_builder/ajax_form.html:118
 msgid ""
@@ -526,4 +550,4 @@ msgstr ""
 
 #: views.py:25
 msgid "Only unique slugs accepted for form views"
-msgstr ""
+msgstr "Alleen unieke slugs zijn geaccepteerd voor formulier views"
