@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 
 from . import recaptcha, settings
 from .entry_model import FormEntry  # NoQA
-from .fields import AttributesField, TagTypeField
+from .fields import AttributesField
 from .helpers import coerce_decimal, mark_safe_lazy
 
 MAX_LENGTH = 256
@@ -108,7 +108,6 @@ class Form(CMSPlugin):
             )
         ),
     )
-    tag_type = TagTypeField()
 
     def get_short_description(self):
         return f"({self.form_name})" if self.form_name else "<unnamed>"
@@ -127,7 +126,6 @@ class FormField(CMSPlugin):
         verbose_name = gettext("Form field item")
 
     ui_item = models.CharField(max_length=30)
-    tag_type = TagTypeField(blank=True)
     config = models.JSONField(default=dict, encoder=DjangoJSONEncoder)
 
     def __init__(self, *args, **kwargs):
