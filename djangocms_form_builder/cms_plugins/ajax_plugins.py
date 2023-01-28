@@ -295,7 +295,7 @@ class FormPlugin(CMSAjaxForm):
                 ("captcha_widget", "captcha_requirement", "captcha_config"),
                 block=None,
                 position=1,
-                blockname=_("reCaptcha"),
+                blockname=_("Captcha"),
                 blockattrs={}
                 if recaptcha.keys_available
                 else dict(
@@ -345,7 +345,7 @@ class FormPlugin(CMSAjaxForm):
 
         # Add recaptcha field in necessary
         if recaptcha.installed and self.instance.captcha_widget:
-            fields[recaptcha.field_name] = recaptcha.get_recaptcha_field(self.instance.captcha_config)
+            fields[recaptcha.field_name] = recaptcha.get_recaptcha_field(self.instance)
 
         # Collect meta options for Meta class
         meta_options = dict(form_name=self.instance.form_name)

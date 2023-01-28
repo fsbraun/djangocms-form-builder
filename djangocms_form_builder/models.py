@@ -72,11 +72,11 @@ class Form(CMSPlugin):
     attributes = AttributesField()
 
     captcha_widget = models.CharField(
-        verbose_name=_("reCaptcha widget"),
+        verbose_name=_("captcha widget"),
         max_length=16,
         blank=True,
         default="v2-invisible" if recaptcha.installed else "",
-        choices=settings.EMPTY_CHOICE + recaptcha.RECAPTCHA_CHOICES,
+        choices=settings.EMPTY_CHOICE + recaptcha.CAPTCHA_CHOICES,
         help_text=mark_safe_lazy(
             _(
                 'Read more in the <a href="{link}" target="_blank">documentation</a>.'
