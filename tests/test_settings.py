@@ -28,7 +28,6 @@ try:  # V4 test?
 
     INSTALLED_APPS += [
         "djangocms_versioning",
-        "djangocms_alias",
     ]
     CMS_CONFIRM_VERSION4 = True
 except ImportError:  # Nope
