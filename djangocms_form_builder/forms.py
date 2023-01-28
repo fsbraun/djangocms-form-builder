@@ -14,7 +14,7 @@ from . import (
     settings,
 )
 from .entry_model import FormEntry
-from .fields import AttributesFormField, ButtonGroup, ChoicesFormField, TagTypeFormField
+from .fields import AttributesFormField, ButtonGroup, ChoicesFormField
 from .helpers import get_option, mark_safe_lazy
 from .models import FormField
 
@@ -85,7 +85,6 @@ class FormsForm(mixin_factory("Form"), ModelForm):
                 "captcha_config",
             ]
         }
-        untangled_fields = ("tag_type",)
 
     form_selection = forms.ChoiceField(
         label=_("Form"),
@@ -168,7 +167,6 @@ class FormsForm(mixin_factory("Form"), ModelForm):
             )
         ),
     )
-    tag_type = TagTypeFormField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
