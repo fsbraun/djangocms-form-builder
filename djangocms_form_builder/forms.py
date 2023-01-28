@@ -169,6 +169,10 @@ class FormsForm(mixin_factory("Form"), ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
+        if not _form_registry and "instance" in kwargs:
+            # remove form_selection data if widget will be hidden
+            kwargs["instance"].form_selection = ""
+
         super().__init__(*args, **kwargs)
         registered_forms = get_registered_forms()
         available_form_actions = actions.get_registered_actions()
@@ -179,7 +183,8 @@ class FormsForm(mixin_factory("Form"), ModelForm):
         self.fields["form_actions"].choices = available_form_actions
 
     def clean(self):
-        if self.cleaned_data["form_selection"] == "":
+        print(f"{self.data=}")
+        if self.cleaned_data.get("form_selection", "") == "":
             if not self.cleaned_data["form_name"]:
                 raise ValidationError(
                     {
