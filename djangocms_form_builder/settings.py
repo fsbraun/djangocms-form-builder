@@ -1,6 +1,7 @@
 import importlib
 
 from django.conf import settings as django_settings
+from django.utils.translation import gettext_lazy as _
 
 EMPTY_CHOICE = (("", "-----"),)
 
@@ -12,7 +13,9 @@ ADMIN_CSS = getattr(
 
 
 FORM_OPTIONS = getattr(django_settings, "DJANGOCMS_FORMS_OPTIONS", {})
-
+MAIL_TEMPLATE_SETS = getattr(django_settings, "DJANGOCMS_MAIL_TEMPLATE_SETS", (
+    ("default", _("Default")),
+))
 
 framework = getattr(django_settings, "DJANGOCMS_FRONTEND_FRAMEWORK", "bootstrap5")
 theme = getattr(django_settings, "DJANGOCMS_FRONTEND_THEME", "djangocms_frontend")

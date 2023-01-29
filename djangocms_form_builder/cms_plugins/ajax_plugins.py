@@ -14,6 +14,7 @@ from sekizai.context import SekizaiContext
 from djangocms_form_builder import settings
 
 from .. import forms, models, recaptcha
+from ..actions import ActionMixin
 from ..forms import SimpleFrontendForm
 from ..helpers import get_option, insert_fields, mark_safe_lazy
 
@@ -46,7 +47,11 @@ class AjaxFormMixin(FormMixin):
         )
 
     def form_valid(self, form):
+        # Execute save method
         save = getattr(form, "save", None)
+        if callable(save):
+            result = form.save()
+        # Identify redirect
         redirect = get_option(form, "redirect", None)
         if isinstance(redirect, str):
             try:
@@ -56,8 +61,6 @@ class AjaxFormMixin(FormMixin):
         elif hasattr(redirect, "get_absolute_url"):
             redirect = redirect.get_absolute_url()
 
-        if callable(save):
-            form.save()
         get_success_context = "get_success_context"
         render_success = "render_success"
         if hasattr(form, "slug"):
@@ -242,7 +245,7 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
 
 
 @plugin_pool.register_plugin
-class FormPlugin(CMSAjaxForm):
+class FormPlugin(ActionMixin, CMSAjaxForm):
     name = _("Form")
     model = models.Form
 
@@ -270,7 +273,7 @@ class FormPlugin(CMSAjaxForm):
         (
             _("Actions"),
             {
-                "classes": ("collapse",),
+                "classes": ("collapse", "action-auto-hide"),
                 "fields": ["form_actions"],
             },
         ),
@@ -313,6 +316,7 @@ class FormPlugin(CMSAjaxForm):
         return super().get_fieldsets(request, obj)
 
     def get_form_class(self, slug=None):
+        """Retrieve or create form for this plugin"""
         if self.instance.child_plugin_instances is None:  # not set if in ajax_post
             self.instance.child_plugin_instances = [
                 child.get_plugin_instance()[0] for child in self.instance.get_children()
