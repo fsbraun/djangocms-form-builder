@@ -283,7 +283,7 @@ class FormPlugin(CMSAjaxForm):
         """Only valid if not inside form"""
         parent = instance
         while parent is not None:
-            if parent.plugin_type == FormPlugin.__name__:
+            if parent.plugin_type == cls.__name__:
                 return [""]
             parent = parent.parent
         return super().get_parent_classes(slot, page, instance)

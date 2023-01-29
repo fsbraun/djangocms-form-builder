@@ -4,31 +4,17 @@
 
 |pypi| |coverage| |python| |django| |djangocms| |djangocms4|
 
-**djangocms-form-builder** supports rendering of styled forms. The objective is
-to tightly integrate forms in the website design. **djangocms-form-builder**
-allows as many forms as you wish on one page. All forms are **ajax/xhr-based**.
-To this end, **djangocms-form-builder** extends the django CMS plugin model
-allowing a form plugin to receive ajax post requests.
+**djangocms-form-builder** supports rendering of styled forms. The objective is to tightly integrate forms in the website design. **djangocms-form-builder** allows as many forms as you wish on one page. All forms are **xhr-based**. To this end, **djangocms-form-builder** extends the django CMS plugin model allowing a form plugin to receive xhr post requests.
 
 There are two different ways to manage forms with **djangocms-form-builder**:
 
-1. **Building a form with django CMS' powerful structure board.** This is
-   fast an easy. It integrates smoothly with other design elements, especially
-   the grid elements allowing to design simple responsive forms.
+1. **Building a form with django CMS' powerful structure board.** This is fast an easy. It integrates smoothly with other design elements, especially the grid elements allowing to design simple responsive forms.
 
-   Form actions can be configured by form. Built in actions include saving the
-   results in the database for later evaluation and mailing submitted forms to
-   the site admins. Other form actions can be registered.
+   Form actions can be configured by form. Built in actions include saving the    results in the database for later evaluation and mailing submitted forms to   the site admins. Other form actions can be registered.
 
-2. Works with **django CMS v4** and **djangocms-alias** to manage your forms centrally.
-   Djangocms-alias becomes your form editor and forms can be placed on pages by
-   refering to them with their alias.
+2. Works with **django CMS v4** and **djangocms-alias** to manage your forms centrally. Djangocms-alias becomes your form editor and forms can be placed on pages by referring to them with their alias.
 
-3. **Registering an application-specific form with djangocms-form-builder.** If you
-   already have forms you may register them with djangocms-form-builder and allow
-   editors to use them in the form plugin. If you only have simpler design
-   requirements, **djangocms-form-builder** allows you to use fieldsets as with
-   admin forms.
+3. **Registering an application-specific form with djangocms-form-builder.** If you already have forms you may register them with djangocms-form-builder and allow editors to use them in the form plugin. If you only have simpler design requirements, **djangocms-form-builder** allows you to use fieldsets as with admin forms.
 
 **************
  Key features
@@ -40,44 +26,43 @@ There are two different ways to manage forms with **djangocms-form-builder**:
 
 -  Integrates with `django-crispy-forms <https://github.com/django-crispy-forms/django-crispy-forms>`_
 
+- Integrates with `djangocms-frontend <https://github.com/django-cms/djangocms-frontend>`_
+
 
 Feedback
 ========
 
-This project is in a early stage. All feedback is welcome! Please
-mail me at fsbraun(at)gmx.de
+This project is in a early stage. All feedback is welcome! Please mail me at fsbraun(at)gmx.de
 
 Also, all contributions are welcome.
 
 Contributing
 ============
 
-This is a an open-source project. We'll be delighted to receive your
-feedback in the form of issues and pull requests. Before submitting your
-pull request, please review our `contribution guidelines
-<http://docs.django-cms.org/en/latest/contributing/index.html>`_.
+This is a an open-source project. We'll be delighted to receive your feedback in the form of issues and pull requests. Before submitting your pull request, please review our `contribution guidelines <http://docs.django-cms.org/en/latest/contributing/index.html>`_.
 
-We're grateful to all contributors who have helped create and maintain
-this package. Contributors are listed at the `contributors
-<https://github.com/fsbraun/djangocms-form-builder/graphs/contributors>`_
-section.
+We're grateful to all contributors who have helped create and maintain this package. Contributors are listed at the `contributors <https://github.com/fsbraun/djangocms-form-builder/graphs/contributors>`_ section.
 
 
-
+************
 Installation
-============
+************
 
 For a manual install:
 
+- run ``pip install djangocms-form-builder``, **or**
+
 -  run ``pip install git+https://github.com/fsbraun/djangocms-form-builder@master#egg=djangocms-form-builder``
 
--  add ``djangocms_form_builder`` to your ``INSTALLED_APPS``:
+-  add ``djangocms_form_builder`` to your ``INSTALLED_APPS``. (If you are using both djangocms-frontend and djangocms-form-builder, add it **after** djangocms-frontend
 
 -  run ``python manage.py migrate``
 
-To use the **djangocms-form-builder** you will have to have
-jQuery installed in your project. ``djangocms-form-builder`` does not include
-jQuery.
+*****
+Usage
+*****
+
+
 
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-form-builder.svg

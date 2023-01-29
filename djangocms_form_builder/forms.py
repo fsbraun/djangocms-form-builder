@@ -183,9 +183,8 @@ class FormsForm(mixin_factory("Form"), ModelForm):
         self.fields["form_actions"].choices = available_form_actions
 
     def clean(self):
-        print(f"{self.data=}")
         if self.cleaned_data.get("form_selection", "") == "":
-            if not self.cleaned_data["form_name"]:
+            if not self.cleaned_data.get("form_name", "-"):
                 raise ValidationError(
                     {
                         "form_name": _(
