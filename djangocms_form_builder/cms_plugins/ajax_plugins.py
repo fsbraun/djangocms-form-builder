@@ -1,3 +1,4 @@
+import json
 from urllib.parse import urlencode
 
 from cms.plugin_base import CMSPluginBase
@@ -270,13 +271,6 @@ class FormPlugin(ActionMixin, CMSAjaxForm):
                 ],
             },
         ),
-        (
-            _("Actions"),
-            {
-                "classes": ("collapse", "action-auto-hide"),
-                "fields": ["form_actions"],
-            },
-        ),
     ]
 
     cache_parent_classes = False
@@ -292,9 +286,19 @@ class FormPlugin(ActionMixin, CMSAjaxForm):
         return super().get_parent_classes(slot, page, instance)
 
     def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if obj is None or not obj.form_selection:
+            fieldsets = insert_fields(
+                fieldsets,
+                ("form_actions",),
+                block=None,
+                position=1,
+                blockname=_("Actions"),
+                blockattrs={"classes": ("collapse", "action-auto-hide")},
+            )
         if recaptcha.installed:
             return insert_fields(
-                super().get_fieldsets(request, obj),
+                fieldsets,
                 ("captcha_widget", "captcha_requirement", "captcha_config"),
                 block=None,
                 position=1,
@@ -313,7 +317,7 @@ class FormPlugin(ActionMixin, CMSAjaxForm):
                     )
                 ),
             )
-        return super().get_fieldsets(request, obj)
+        return fieldsets
 
     def get_form_class(self, slug=None):
         """Retrieve or create form for this plugin"""
@@ -321,11 +325,12 @@ class FormPlugin(ActionMixin, CMSAjaxForm):
             self.instance.child_plugin_instances = [
                 child.get_plugin_instance()[0] for child in self.instance.get_children()
             ]
+        form_class = None
         if self.instance.child_plugin_instances:
-            return self.create_form_class_from_plugins()
+            form_class = self.create_form_class_from_plugins()
         if self.instance.form_selection:
-            return forms._form_registry.get(self.instance.form_selection, None)
-        return None
+            form_class = forms._form_registry.get(self.instance.form_selection, None)
+        return form_class
 
     def create_form_class_from_plugins(self):
         def traverse(instance):
@@ -363,8 +368,13 @@ class FormPlugin(ActionMixin, CMSAjaxForm):
         ] = self.instance.placeholder.page  # Default behavior: redirect to same page
         meta_options["login_required"] = self.instance.form_login_required
         meta_options["unique"] = self.instance.form_unique
-        meta_options["form_actions"] = self.instance.form_actions
-        fields["Meta"] = type("Meta", (), dict(options=meta_options))  # Meta class
+        meta_options["form_actions"] = json.loads(self.instance.form_actions.replace("'", '"'))
+        meta_options["form_parameters"] = getattr(self.instance, "action_parameters", {})
+
+        fields["Meta"] = type("Meta", (), dict(
+            options=meta_options,
+            verbose_name=self.instance.form_name.replace("-", " ").replace("_", " ").capitalize(),
+        ))  # Meta class
 
         return type(
             "FrontendAutoForm",

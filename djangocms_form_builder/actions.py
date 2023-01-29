@@ -97,6 +97,10 @@ class FormAction(EntangledModelFormMixin):
     def execute(self, form, request):
         raise NotImplementedError()
 
+    @staticmethod
+    def get_parameter(form, param):
+        return (get_option(form, "form_parameters") or {}).get(param, None)
+
 
 @register
 class SaveToDBAction(FormAction):
@@ -180,11 +184,11 @@ class SendMailAction(FormAction):
     )
 
     def execute(self, form, request):
-        recipients = form.cleaned_data["sendemail_recipients"].split()
-        template_set = form.cleaned_data["sendemail_template"]
+        recipients = (self.get_parameter(form, "sendemail_recipients") or []).split()
+        template_set = self.get_parameter(form, "sendemail_template") or "default"
         context = dict(
             cleaned_data=form.cleaned_data,
-            form_name=form.cleaned_data["form_name"].replace("-", " ").replace("_", " ").capitalize(),
+            form_name=getattr(form.Meta, "verbose_name", ""),
             user=request.user,
             user_agent=request.headers["User-Agent"],
             referer=request.headers["Referer"],
@@ -192,11 +196,11 @@ class SendMailAction(FormAction):
 
         html_message = render_to_string(f"djangocms_form_builder/mails/{template_set}/mail_html.html", context)
         try:
-            message = render_to_string((f"djangocms_form_builder/mails/{template_set}/mail.txt", context))
+            message = render_to_string(f"djangocms_form_builder/mails/{template_set}/mail.txt", context)
         except TemplateDoesNotExist:
             message = strip_tags(html_message)
         try:
-            subject = render_to_string((f"djangocms_form_builder/mails/{template_set}/subject.txt", context))
+            subject = render_to_string(f"djangocms_form_builder/mails/{template_set}/subject.txt", context)
         except TemplateDoesNotExist:
             subject = self.subject % dict(form_name=context["form_name"])
         if not recipients:

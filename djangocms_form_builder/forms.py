@@ -108,7 +108,7 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         validators=[
             validate_slug,
         ],
-        help_text=_("Slug that allows to identify form submissions uniquely."),
+        help_text=_("Slug that allows to uniquely identify forms."),
     )
     form_login_required = forms.BooleanField(
         label=_("Login required to submit form"),
@@ -198,7 +198,6 @@ class FormsForm(mixin_factory("Form"), EntangledModelForm):
         self.fields["form_actions"].choices = available_form_actions
 
     def clean(self):
-        print(f"{self.errors=} {self.data=}")
         if self.cleaned_data.get("form_selection", "") == "":
             if not self.cleaned_data.get("form_name", "-"):
                 raise ValidationError(

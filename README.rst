@@ -69,6 +69,9 @@ First create a ``Form`` plugin to add a form. Each form created with help of the
 
 Add form fields by adding child classes to the form plugin. Child classes can be form fields but also any other CMS Plugin. CMS Plugins may, e.g., be used to add custom formatting or additional help texts to a form.
 
+Form fields
+-----------
+
 Currently the following form fields are supported:
 
 * CharField, EmailField, URLField
@@ -79,6 +82,21 @@ Currently the following form fields are supported:
 * BooleanField
 
 A Form plugin must not be used within another Form plugin.
+
+Actions
+-------
+
+Upon submission of a valid form actions can be performed. A project can register as many actions as it likes::
+
+    from djangocms_form_builder import actions
+
+    @actions.register
+    class MyAction(actions.FormAction):
+        verbose_name = _("Everything included action")
+
+        def execute(self, form, request):
+            ...  # This method is run upon successful submission of the form
+
 
 Using (existing) Django forms with djangocms-form-builder
 =========================================================
@@ -105,8 +123,9 @@ By default the class name is translated to a human readable form (``MyGreatForm`
 
 The verbose name will be shown in a Select field of the Form plugin.
 
-Upon form submission a ``save()`` method of the form (if it has one). After executing the ``save()`` method the user is redirected to the url given in the  ``redirect`` attribute. 
+Upon form submission a ``save()`` method of the form (if it has one). After executing the ``save()`` method the user is redirected to the url given in the  ``redirect`` attribute.
 
+Actions are not available for Django forms. Any actions to be performed upon submission should reside in its ``save()`` method.
 
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-form-builder.svg
