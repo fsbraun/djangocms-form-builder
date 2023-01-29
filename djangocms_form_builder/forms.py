@@ -169,7 +169,7 @@ class FormsForm(mixin_factory("Form"), ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        if not _form_registry and "instance" in kwargs:
+        if not _form_registry and "instance" in kwargs and kwargs["instance"] is not None:
             # remove form_selection data if widget will be hidden
             kwargs["instance"].form_selection = ""
 
