@@ -92,12 +92,13 @@ class FormsForm(mixin_factory("Form"), ModelForm):
         initial="",
     )
     form_name = forms.CharField(
-        label=_("Form name"),
+        label=_("Form identifier"),
         required=False,
         initial="",
         validators=[
             validate_slug,
         ],
+        help_text=_("Slug that allows to identify form submissions uniquely.")
     )
     form_login_required = forms.BooleanField(
         label=_("Login required to submit form"),

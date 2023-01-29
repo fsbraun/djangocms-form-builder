@@ -62,7 +62,35 @@ For a manual install:
 Usage
 *****
 
+Creating forms using django CMS' structure board
+================================================
 
+First create a ``Form`` plugin to add a form. Each form created with help of the structure board needs a unique identifier (formatted as a slug).
+
+Add form fields by adding child classes to the form plugin. 
+
+Using (existing) Django forms with djangocms-form-builder
+=========================================================
+
+The ``Form`` plugin also provides access to Django forms if they are registered with djangocms-form-builder::
+
+    from djangocms_form_builder import register_with_form_builder
+
+    @register_with_form_builder
+    class MyGreatForm(forms.Form):
+        ...
+
+Alternatively you can also register at any other place in the code by running ``register_with_form_builder(AnotherGreatForm)``.
+
+By default the class name is translated to a human readable form (``MyGreatForm`` -> ``"My Great Form"``). Additional information may be added using Meta classes::
+
+    @register_with_form_builder
+    class MyGreatForm(forms.Form):
+        class Meta:
+            verbose_name = _("My great form")  # can be localized
+            redirect = "https://somewhere.org"  # string or object with get_absolute_url() method
+            floating_labels = True  # switch on floating labels
+            field_sep = "mp-3"  # separator used between fields (depends on css framework)
 
 
 .. |pypi| image:: https://badge.fury.io/py/djangocms-form-builder.svg

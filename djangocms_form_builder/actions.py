@@ -107,16 +107,17 @@ class SendMailAction(FormAction):
         )
         html_message = render_to_string(self.template, context)
         message = strip_tags(html_message)
+        form_name = form.cleaned_data["form_name"].replace("-", " ").capitalize()
         if self.recipients is None:
             mail_admins(
-                self.subject % dict(form_name=""),
+                self.subject % dict(form_name=form_name),
                 message,
                 fail_silently=True,
                 html_message=html_message,
             )
         else:
             send_mail(
-                self.subject % dict(form_name=""),
+                self.subject % dict(form_name=form_name),
                 message,
                 self.recipients,
                 self.from_mail,
