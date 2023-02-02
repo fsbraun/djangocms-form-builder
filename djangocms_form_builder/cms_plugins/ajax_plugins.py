@@ -1,3 +1,4 @@
+import json
 from urllib.parse import urlencode
 
 from cms.plugin_base import CMSPluginBase
@@ -14,6 +15,7 @@ from sekizai.context import SekizaiContext
 from djangocms_form_builder import settings
 
 from .. import forms, models, recaptcha
+from ..actions import ActionMixin
 from ..forms import SimpleFrontendForm
 from ..helpers import get_option, insert_fields, mark_safe_lazy
 
@@ -46,7 +48,11 @@ class AjaxFormMixin(FormMixin):
         )
 
     def form_valid(self, form):
+        # Execute save method
         save = getattr(form, "save", None)
+        if callable(save):
+            result = form.save()
+        # Identify redirect
         redirect = get_option(form, "redirect", None)
         if isinstance(redirect, str):
             try:
@@ -56,8 +62,6 @@ class AjaxFormMixin(FormMixin):
         elif hasattr(redirect, "get_absolute_url"):
             redirect = redirect.get_absolute_url()
 
-        if callable(save):
-            form.save()
         get_success_context = "get_success_context"
         render_success = "render_success"
         if hasattr(form, "slug"):
@@ -242,7 +246,7 @@ class CMSAjaxForm(AjaxFormMixin, CMSAjaxBase):
 
 
 @plugin_pool.register_plugin
-class FormPlugin(CMSAjaxForm):
+class FormPlugin(ActionMixin, CMSAjaxForm):
     name = _("Form")
     model = models.Form
 
@@ -267,13 +271,6 @@ class FormPlugin(CMSAjaxForm):
                 ],
             },
         ),
-        (
-            _("Actions"),
-            {
-                "classes": ("collapse",),
-                "fields": ["form_actions"],
-            },
-        ),
     ]
 
     cache_parent_classes = False
@@ -289,9 +286,19 @@ class FormPlugin(CMSAjaxForm):
         return super().get_parent_classes(slot, page, instance)
 
     def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if obj is None or not obj.form_selection:  # No Actions if a Django form has been selected
+            fieldsets = insert_fields(
+                fieldsets,
+                ("form_actions",),
+                block=None,
+                position=1,
+                blockname=_("Actions"),
+                blockattrs={"classes": ("collapse", "action-auto-hide")},
+            )
         if recaptcha.installed:
             return insert_fields(
-                super().get_fieldsets(request, obj),
+                fieldsets,
                 ("captcha_widget", "captcha_requirement", "captcha_config"),
                 block=None,
                 position=1,
@@ -310,9 +317,10 @@ class FormPlugin(CMSAjaxForm):
                     )
                 ),
             )
-        return super().get_fieldsets(request, obj)
+        return fieldsets
 
     def get_form_class(self, slug=None):
+        """Retrieve or create form for this plugin"""
         if self.instance.child_plugin_instances is None:  # not set if in ajax_post
             self.instance.child_plugin_instances = [
                 child.get_plugin_instance()[0] for child in self.instance.get_children()
@@ -359,8 +367,14 @@ class FormPlugin(CMSAjaxForm):
         ] = self.instance.placeholder.page  # Default behavior: redirect to same page
         meta_options["login_required"] = self.instance.form_login_required
         meta_options["unique"] = self.instance.form_unique
-        meta_options["form_actions"] = self.instance.form_actions
-        fields["Meta"] = type("Meta", (), dict(options=meta_options))  # Meta class
+        form_actions = self.instance.form_actions or "[]"
+        meta_options["form_actions"] = json.loads(form_actions.replace("'", '"'))
+        meta_options["form_parameters"] = getattr(self.instance, "action_parameters", {})
+
+        fields["Meta"] = type("Meta", (), dict(
+            options=meta_options,
+            verbose_name=self.instance.form_name.replace("-", " ").replace("_", " ").capitalize(),
+        ))  # Meta class with options and verbose name
 
         return type(
             "FrontendAutoForm",

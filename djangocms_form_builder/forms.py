@@ -1,7 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_slug
-from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 from entangled.forms import EntangledModelForm, EntangledModelFormMixin
 
@@ -10,13 +9,13 @@ from . import (
     actions,
     constants,
     get_registered_forms,
+    models,
     recaptcha,
     settings,
 )
 from .entry_model import FormEntry
 from .fields import AttributesFormField, ButtonGroup, ChoicesFormField
 from .helpers import get_option, mark_safe_lazy
-from .models import FormField
 
 
 class Noop:
@@ -59,31 +58,42 @@ class SimpleFrontendForm(forms.Form):
                 results[action] = _("Action not available any more")
         if not form_actions:
             results[None] = _("No action registered")
+        return results
 
 
-class FormsForm(mixin_factory("Form"), ModelForm):
+class SelectMultipleActionsWidget(forms.CheckboxSelectMultiple):
+    def format_value(self, value):
+        import json
+
+        if isinstance(value, str):
+            value = json.loads(value.replace("'", '"'))
+        return super().format_value(value)
+
+
+class FormsForm(mixin_factory("Form"), EntangledModelForm):
     """
     Components > "Forms" Plugin
     https://getbootstrap.com/docs/5.1/forms/overview/
     """
 
     class Meta:
-        model = FormField
+        model = models.Form
         exclude = ()
+        untangled_fields = [
+            "form_selection",
+            "form_name",
+            "form_login_required",
+            "form_unique",
+            "form_floating_labels",
+            "form_spacing",
+            "form_actions",
+            "attributes",
+            "captcha_widget",
+            "captcha_requirement",
+            "captcha_config",
+        ]
         entangled_fields = {
-            "config": [
-                "form_selection",
-                "form_name",
-                "form_login_required",
-                "form_unique",
-                "form_floating_labels",
-                "form_spacing",
-                "form_actions",
-                "attributes",
-                "captcha_widget",
-                "captcha_requirement",
-                "captcha_config",
-            ]
+            "action_parameters": [],
         }
 
     form_selection = forms.ChoiceField(
@@ -98,7 +108,7 @@ class FormsForm(mixin_factory("Form"), ModelForm):
         validators=[
             validate_slug,
         ],
-        help_text=_("Slug that allows to identify form submissions uniquely.")
+        help_text=_("Slug that allows to uniquely identify forms."),
     )
     form_login_required = forms.BooleanField(
         label=_("Login required to submit form"),
@@ -126,7 +136,7 @@ class FormsForm(mixin_factory("Form"), ModelForm):
 
     form_actions = forms.MultipleChoiceField(
         label=_("Actions to be taken after form submission"),
-        widget=forms.CheckboxSelectMultiple(),
+        widget=SelectMultipleActionsWidget(),
         required=False,
     )
 
@@ -170,7 +180,11 @@ class FormsForm(mixin_factory("Form"), ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        if not _form_registry and "instance" in kwargs and kwargs["instance"] is not None:
+        if (
+            not _form_registry
+            and "instance" in kwargs
+            and kwargs["instance"] is not None
+        ):
             # remove form_selection data if widget will be hidden
             kwargs["instance"].form_selection = ""
 
@@ -314,7 +328,7 @@ class FormFieldMixin(EntangledModelFormMixin):
 
 class CharFieldForm(mixin_factory("CharField"), FormFieldMixin, EntangledModelForm):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "min_length",
@@ -336,13 +350,13 @@ class CharFieldForm(mixin_factory("CharField"), FormFieldMixin, EntangledModelFo
 
 class EmailFieldForm(mixin_factory("EmailField"), FormFieldMixin, EntangledModelForm):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {"config": []}
 
 
 class UrlFieldForm(mixin_factory("URLField"), FormFieldMixin, EntangledModelForm):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {"config": []}
 
 
@@ -350,7 +364,7 @@ class DecimalFieldForm(
     mixin_factory("DecimalField"), FormFieldMixin, EntangledModelForm
 ):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "min_value",
@@ -379,7 +393,7 @@ class IntegerFieldForm(
     mixin_factory("IntegerField"), FormFieldMixin, EntangledModelForm
 ):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "min_value",
@@ -401,7 +415,7 @@ class TextareaFieldForm(
     mixin_factory("TextareaField"), FormFieldMixin, EntangledModelForm
 ):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "min_length",
@@ -431,7 +445,7 @@ class TextareaFieldForm(
 
 class DateFieldForm(mixin_factory("DateField"), FormFieldMixin, EntangledModelForm):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {"config": []}
 
     def __init__(self, *args, **kwargs):
@@ -443,7 +457,7 @@ class DateTimeFieldForm(
     mixin_factory("DateTimeField"), FormFieldMixin, EntangledModelForm
 ):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {"config": []}
 
     def __init__(self, *args, **kwargs):
@@ -453,7 +467,7 @@ class DateTimeFieldForm(
 
 class TimeFieldForm(mixin_factory("TimeField"), FormFieldMixin, EntangledModelForm):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {"config": []}
 
     def __init__(self, *args, **kwargs):
@@ -468,7 +482,7 @@ class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledMod
             self.fields["field_choices"].initial = kwargs["instance"].get_choices()
 
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "field_select",
@@ -510,7 +524,7 @@ class SelectFieldForm(mixin_factory("SelectField"), FormFieldMixin, EntangledMod
 
 class ChoiceForm(EntangledModelForm):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "value",
@@ -534,7 +548,7 @@ class BooleanFieldForm(
     mixin_factory("BooleanField"), FormFieldMixin, EntangledModelForm
 ):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "field_as_switch",
@@ -563,7 +577,7 @@ class SubmitButtonForm(
     mixin_factory("SubmitButton"), FormFieldMixin, EntangledModelForm
 ):
     class Meta:
-        model = FormField
+        model = models.FormField
         entangled_fields = {
             "config": [
                 "submit_cta",

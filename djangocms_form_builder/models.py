@@ -46,13 +46,11 @@ class Form(CMSPlugin):
             "which require login."
         ),
     )
-
     form_unique = models.BooleanField(
         verbose_name=_("User can reopen form"),
         default=False,
         help_text=_('Requires "Login required" to be checked to work.'),
     )
-
     form_floating_labels = models.BooleanField(
         verbose_name=_("Floating labels"),
         default=False,
@@ -66,7 +64,13 @@ class Form(CMSPlugin):
         verbose_name=_("Actions to be taken after form submission"),
         blank=True,
         max_length=4 * MAX_LENGTH,
-        # widget=forms.CheckboxSelectMultiple(),
+    )
+
+    action_parameters = models.JSONField(
+        default=dict,
+        encoder=DjangoJSONEncoder,
+        blank=True,
+        null=True,
     )
 
     attributes = AttributesField()
