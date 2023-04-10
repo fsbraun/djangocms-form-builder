@@ -92,7 +92,7 @@ Upon submission of a valid form actions can be performed. A project can register
 
     @actions.register
     class MyAction(actions.FormAction):
-        verbose_name = _("Everything included action")
+        verbose_name = _("Everything included action")  # Required name shown to user
 
         def execute(self, form, request):
             ...  # This method is run upon successful submission of the form
