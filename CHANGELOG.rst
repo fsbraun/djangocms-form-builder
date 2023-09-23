@@ -8,6 +8,7 @@ Changelog
 * Removed col and rows setting from CharField form plugin
 * Set more margin options in spacing between fields
 * Fixed anonymous as None to Foregin key 'form_user'
+* Added attributesField to every Form plugin for customizing
 
 0.1.0
 ==================
