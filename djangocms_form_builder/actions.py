@@ -107,19 +107,24 @@ class SaveToDBAction(FormAction):
     verbose_name = _("Save form submission")
 
     def execute(self, form, request):
-        if get_option(form, "unique", False) and get_option(
+        
+	form_user = None
+	if request.user.is_authenticated:
+	    form_user = request.user
+
+	if get_option(form, "unique", False) and get_option(
             form, "login_required", False
         ):
             keys = {
                 "form_name": get_option(form, "form_name"),
-                "form_user": request.user,
+                "form_user": form_user,
             }
             defaults = {}
         else:
             keys = {}
             defaults = {
                 "form_name": get_option(form, "form_name"),
-                "form_user": request.user,
+                "form_user": form_user,
             }
         defaults.update(
             {
