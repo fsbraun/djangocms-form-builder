@@ -6,13 +6,14 @@ from django.utils.translation import gettext_lazy as _
 from .. import forms
 from .. import forms as forms_module
 from .. import models, settings
+from ..attributes import AttributesMixin
 from ..helpers import add_plugin, delete_plugin, insert_fields
 from .ajax_plugins import FormPlugin
 
 mixin_factory = settings.get_renderer(forms_module)
 
 
-class FormElementPlugin(CMSPluginBase):
+class FormElementPlugin(AttributesMixin, CMSPluginBase):
     top_element = FormPlugin.__name__
     module = _("Forms")
     render_template = f"djangocms_form_builder/{settings.framework}/widgets/base.html"
