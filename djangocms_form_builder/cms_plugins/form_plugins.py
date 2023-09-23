@@ -69,7 +69,6 @@ class CharFieldPlugin(mixin_factory("CharField"), FormElementPlugin):
     name = _("Text")
     model = models.CharField
     form = forms.CharFieldForm
-    settings_fields = (("min_length", "max_length"),)
 
 
 @plugin_pool.register_plugin
