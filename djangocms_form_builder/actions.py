@@ -184,7 +184,7 @@ class SendMailAction(FormAction):
     )
 
     def execute(self, form, request):
-        recipients = (self.get_parameter(form, "sendemail_recipients") or []).split()
+        recipients = (self.get_parameter(form, "sendemail_recipients") or [])
         template_set = self.get_parameter(form, "sendemail_template") or "default"
         context = dict(
             cleaned_data=form.cleaned_data,
