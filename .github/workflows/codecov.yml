@@ -23,6 +23,9 @@ jobs:
         os: [
             ubuntu-20.04,
         ]
+      exclude:
+        - python-version: 3.9
+          requirements-file: dj50_cms41.txt
 
     steps:
     - uses: actions/checkout@v3
