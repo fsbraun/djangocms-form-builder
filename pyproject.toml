@@ -8,6 +8,7 @@ dynamic = ["version"]
 description = "Adds a form editor to the structure board of django CMS."
 readme = "README.rst"
 license.text = "BSD-3-Clause"
+requires-python = ">=3.10"
 authors = [
     { name = "fsbraun", email = "fsbraun@gmx.de" },
 ]
