@@ -119,7 +119,7 @@ class SaveToDBAction(FormAction):
             keys = {}
             defaults = {
                 "form_name": get_option(form, "form_name"),
-                "form_user": request.user,
+                "form_user": request.user if get_option(form, "login_required", False) else None
             }
         defaults.update(
             {
